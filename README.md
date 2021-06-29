@@ -1,16 +1,7 @@
 # flutter_movie_blocpattern
 
-A new Flutter project.
+With this app you can check list of film based on www.themoviedb.org database.
 
-## Getting Started
+This app was develop by Flutter Framework, can running in Android and IOS (coming soon).
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Contact me if you want to use this repo / app.
