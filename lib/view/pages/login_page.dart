@@ -1,10 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_movie_blocpattern/services/authnetications.dart';
 
+import 'home_page.dart';
+
 class AuthenticationChecker extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    Authentication authentication = Authentication();
+    return FutureBuilder(
+      future: authentication.loginToken(),
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        if (snapshot.data == 'nope') {
+          print(snapshot.data.toString());
+          return LoginPage();
+        } else {
+          print(snapshot.data.toString());
+          return HomePage();
+        }
+      },
+    );
   }
 }
 
@@ -45,8 +59,22 @@ class _LoginPageState extends State<LoginPage> {
             ),
             ElevatedButton(
               onPressed: () =>
-                  authentication.login(_email.text, _password.text),
+                  authentication.login(_email.text, _password.text, context),
               child: Text('LOGIN'),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            ElevatedButton(
+              onPressed: () => authentication.loginToken(),
+              child: Text('LOGIN with token'),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            ElevatedButton(
+              onPressed: () => authentication.logout(context),
+              child: Text('Logout'),
             ),
           ],
         ),
@@ -54,3 +82,4 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 }
+

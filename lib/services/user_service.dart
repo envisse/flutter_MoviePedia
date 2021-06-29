@@ -17,7 +17,7 @@ Future<List<User>> usersAPIService() async {
 }
 
 Future<User> userAPIService(int id) async {
-  var urlAPI = 'https://jsonplaceholder.typicode.com/users/${id}';
+  var urlAPI = 'https://jsonplaceholder.typicode.com/users/' + id.toString();
   var respone = await http.get(Uri.parse(urlAPI));
 
   var jsonObject = json.decode(respone.body);
