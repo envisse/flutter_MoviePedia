@@ -36,50 +36,59 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 20),
-        child: Column(
-          children: [
-            Text(
-              'LOGIN',
-              style: TextStyle(fontSize: 24),
-            ),
-            TextFormField(
-              controller: _email,
-              decoration: InputDecoration(hintText: 'username'),
-            ),
-            TextFormField(
-              controller: _password,
-              obscureText: true,
-              decoration: InputDecoration(hintText: 'password'),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            ElevatedButton(
-              onPressed: () =>
-                  authentication.login(_email.text, _password.text, context),
-              child: Text('LOGIN'),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            ElevatedButton(
-              onPressed: () => authentication.loginToken(),
-              child: Text('LOGIN with token'),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            ElevatedButton(
-              onPressed: () => authentication.logout(context),
-              child: Text('Logout'),
-            ),
-          ],
+    return SafeArea(
+      child: Center(
+        child: Container(
+          margin: EdgeInsets.symmetric(horizontal: 24),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text(
+                    'LOGIN',
+                    style: TextStyle(fontSize: 24),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 5,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text(
+                    'Please sign in to continue',
+                    style: TextStyle(fontSize: 14),
+                  ),
+                ],
+              ),
+              TextFormField(
+                controller: _email,
+              ),
+              TextFormField(
+                controller: _password,
+                obscureText: true,
+                decoration: InputDecoration(hintText: 'password'),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  ElevatedButton(
+                    onPressed: () => authentication.login(
+                        _email.text, _password.text, context),
+                    child: Text('LOGIN'),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 }
-
