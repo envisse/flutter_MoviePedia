@@ -6,7 +6,7 @@ import 'package:flutter_movie_blocpattern/view/pages/home_page.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
-String url = 'http://192.168.1.17:8000/api/';
+String url = 'https://tiket.borneocorner.com/api';
 String? token;
 
 class Authentication {
