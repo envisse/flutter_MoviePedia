@@ -6,10 +6,11 @@ import 'package:flutter_movie_blocpattern/view/pages/home_page.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
-String url = 'https://tiket.borneocorner.com/api';
+String url = 'https://tiket.borneocorner.com/api/';
 String? token;
 
 class Authentication {
+  //service for login
   Future login(String email, String password, BuildContext context) async {
     String route = url + 'login';
 
@@ -40,6 +41,7 @@ class Authentication {
     return respone.statusCode.toString();
   }
 
+  //service login with token
   Future<String> loginToken() async {
     final prefs = await SharedPreferences.getInstance();
     try {
@@ -62,6 +64,30 @@ class Authentication {
     }
   }
 
+  //service for register
+  Future<bool> register(
+      String name, String email, String password, String hp) async {
+    String route = url + 'register';
+    var respone = await http.post(Uri.parse(route),
+        body: {'email': email, 'password': password, 'hp': hp, 'nama': name});
+
+    //error handling
+    if (respone.statusCode == 403) {
+      print('something wrong');
+      return false;
+    } else if (respone.statusCode == 422) {
+      var jsonObject = json.decode(respone.body);
+      var messege = jsonObject['messege'];
+      print(messege.toString());
+      return false;
+    } else if (respone.statusCode == 200) {
+      return true;
+    }
+
+    return true;
+  }
+
+  //service for logout
   Future logout(BuildContext context) async {
     final prefs = await SharedPreferences.getInstance();
     String userid = prefs.getInt('user_id').toString();
