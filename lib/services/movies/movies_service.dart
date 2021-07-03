@@ -7,7 +7,7 @@ String apikey = "9e16931e0d0345a1b73821552793a73a";
 //service for getting movies now playing data
 Future<List<Movies>> moviesNowPlayingAPIservice(int page) async {
   var urlAPI =
-      'https://api.themoviedb.org/3/movie/now_playing?api_key=${apikey}&page=${page}';
+      'https://api.themoviedb.org/3/movie/now_playing?api_key=$apikey&page=$page';
   var respone = await http.get(Uri.parse(urlAPI));
   var jsonObject = json.decode(respone.body);
 
@@ -23,7 +23,7 @@ Future<List<Movies>> moviesNowPlayingAPIservice(int page) async {
 
 //service for getting movies upcoming data
 Future<List<Movies>> moviesUpocmingAPIservice(int page) async {
-  var urlAPI = 'https://api.themoviedb.org/3/movie/upcoming?api_key=${apikey}&language=en-US&page=${page}';
+  var urlAPI = 'https://api.themoviedb.org/3/movie/upcoming?api_key=$apikey&language=en-US&page=$page';
   var respone = await http.get(Uri.parse(urlAPI));
   var jsonobject = json.decode(respone.body);
 
@@ -38,7 +38,7 @@ Future<List<Movies>> moviesUpocmingAPIservice(int page) async {
 
 //service for getting movies popular data
 Future<List<Movies>> moviesPopularAPIservice(int page) async {
-  var urlAPI = 'https://api.themoviedb.org/3/movie/popular?api_key=${apikey}&language=en-US&page=${page}';
+  var urlAPI = 'https://api.themoviedb.org/3/movie/popular?api_key=$apikey&language=en-US&page=$page';
   var respone = await http.get(Uri.parse(urlAPI));
   var jsonobject = json.decode(respone.body);
 
@@ -53,7 +53,7 @@ Future<List<Movies>> moviesPopularAPIservice(int page) async {
 
 //service for getting movies top rated data
 Future<List<Movies>> moviesTopRatedAPIservice(int page) async {
-  var urlAPI = 'https://api.themoviedb.org/3/movie/top_rated?api_key=${apikey}&language=en-US&page=${page}';
+  var urlAPI = 'https://api.themoviedb.org/3/movie/top_rated?api_key=$apikey&language=en-US&page=$page';
   var respone = await http.get(Uri.parse(urlAPI));
   var jsonobject = json.decode(respone.body);
 
