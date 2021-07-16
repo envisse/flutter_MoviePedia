@@ -1,10 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_movie_blocpattern/services/authnetications.dart';
-import 'package:flutter_movie_blocpattern/view/components/textformfield.dart';
-import 'package:flutter_movie_blocpattern/view/pages/register_page.dart';
-import 'package:flutter_movie_blocpattern/view/shared/themedata.dart';
-
-import 'home_page.dart';
+part of 'base_page.dart';
 
 class AuthenticationChecker extends StatelessWidget {
   @override
@@ -13,11 +7,9 @@ class AuthenticationChecker extends StatelessWidget {
     return FutureBuilder(
       future: authentication.loginToken(),
       builder: (BuildContext context, AsyncSnapshot snapshot) {
-        if (snapshot.data == 'nope') {
-          print(snapshot.data.toString());
+        if (snapshot.data == false) {
           return LoginPage();
         } else {
-          print(snapshot.data.toString());
           return HomePage();
         }
       },
@@ -54,9 +46,8 @@ class _LoginPageState extends State<LoginPage> {
                   children: [
                     Align(
                       alignment: Alignment.topLeft,
-                      child: Text(
-                        'Login',
-                        style: TextStyle(fontSize: 28),
+                      child: Textheading1(
+                        text: 'Login',
                       ),
                     ),
                     SizedBox(
@@ -64,10 +55,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     Align(
                       alignment: Alignment.topLeft,
-                      child: Text(
-                        'Please sign in to continue',
-                        style: TextStyle(fontSize: 14),
-                      ),
+                      child: Textbody(text: 'please sign in to continue'),
                     ),
                     SizedBox(
                       height: 15,
@@ -84,7 +72,7 @@ class _LoginPageState extends State<LoginPage> {
                               )
                             : Icon(
                                 Icons.person,
-                                color: error,
+                                color: Dimens.color_error,
                               )),
                     SizedBox(
                       height: 15,
@@ -97,7 +85,7 @@ class _LoginPageState extends State<LoginPage> {
                       controller: _password,
                       icons: validate
                           ? Icon(Icons.vpn_key, color: null)
-                          : Icon(Icons.vpn_key, color: error),
+                          : Icon(Icons.vpn_key, color: Dimens.color_error),
                     ),
                     SizedBox(
                       height: 15,

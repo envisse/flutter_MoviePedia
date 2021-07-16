@@ -1,9 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_movie_blocpattern/services/authnetications.dart';
-import 'package:flutter_movie_blocpattern/view/components/buttoncomponents.dart';
-import 'package:flutter_movie_blocpattern/view/components/textformfield.dart';
-import 'package:flutter_movie_blocpattern/view/shared/themedata.dart';
-
+//extend dari base_page.dart
+part of 'base_page.dart';
 class Registerpage extends StatefulWidget {
   @override
   _RegisterpageState createState() => _RegisterpageState();
@@ -14,6 +10,7 @@ class _RegisterpageState extends State<Registerpage> {
   TextEditingController _fullname = TextEditingController();
   TextEditingController _email = TextEditingController();
   TextEditingController _password = TextEditingController();
+  TextEditingController _retypepassword = TextEditingController();
   TextEditingController _hp = TextEditingController();
   bool validate = true;
   Authentication _authentication = Authentication();
@@ -23,7 +20,7 @@ class _RegisterpageState extends State<Registerpage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: background,
+        backgroundColor: Dimens.color_background,
       ),
       body: Container(
         margin: EdgeInsets.symmetric(horizontal: 24),
@@ -36,9 +33,8 @@ class _RegisterpageState extends State<Registerpage> {
               ),
               Align(
                 alignment: Alignment.topLeft,
-                child: Text(
-                  'Create Account',
-                  style: TextStyle(fontSize: 28),
+                child: Textheading1(
+                  text: 'Crate Account',
                 ),
               ),
               SizedBox(
@@ -53,10 +49,7 @@ class _RegisterpageState extends State<Registerpage> {
                         Icons.person,
                         color: null,
                       )
-                    : Icon(
-                        Icons.person,
-                        color: error,
-                      ),
+                    : Icon(Icons.person, color: Dimens.color_error),
               ),
               SizedBox(
                 height: 15,
@@ -72,7 +65,24 @@ class _RegisterpageState extends State<Registerpage> {
                       )
                     : Icon(
                         Icons.mail,
-                        color: error,
+                        color: Dimens.color_error,
+                      ),
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              Textformfieldcomponent(
+                hint: 'Phone Number',
+                validator: (value) => value!.isEmpty ? 'fill email' : null,
+                controller: _hp,
+                icons: validate
+                    ? Icon(
+                        Icons.phone_android,
+                        color: null,
+                      )
+                    : Icon(
+                        Icons.phone_android,
+                        color: Dimens.color_error,
                       ),
               ),
               SizedBox(
@@ -90,7 +100,7 @@ class _RegisterpageState extends State<Registerpage> {
                       )
                     : Icon(
                         Icons.vpn_key,
-                        color: error,
+                        color: Dimens.color_error,
                       ),
               ),
               SizedBox(
@@ -99,7 +109,7 @@ class _RegisterpageState extends State<Registerpage> {
               Textformfieldcomponent(
                 hint: 'retype password',
                 validator: (value) => value!.isEmpty ? 'fill email' : null,
-                controller: _hp,
+                controller: _retypepassword,
                 icons: validate
                     ? Icon(
                         Icons.vpn_key,
@@ -107,7 +117,7 @@ class _RegisterpageState extends State<Registerpage> {
                       )
                     : Icon(
                         Icons.vpn_key,
-                        color: error,
+                        color: Dimens.color_error,
                       ),
               ),
               SizedBox(

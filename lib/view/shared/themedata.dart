@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_movie_blocpattern/view/shared/dimens.dart';
+
+
+final Color textcolor = Dimens.color_secondary;
 
 ThemeData theme() {
   return ThemeData(
-    colorScheme: _moviecolorScheme,
+    colorScheme: Dimens.moviecolorScheme,
     scaffoldBackgroundColor: Colors.black,
-    
+
+    //BUTTON
     //theming elevated button
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
@@ -14,45 +19,45 @@ ThemeData theme() {
         padding: EdgeInsets.symmetric(horizontal: 25),
       ),
     ),
+    //theming outlinedbutton
+    outlinedButtonTheme: OutlinedButtonThemeData(
+      style: OutlinedButton.styleFrom(
+        shape:
+            new RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+        padding: EdgeInsets.symmetric(horizontal: 25),
+      ),
+    ),
 
+    //FORMFIELD
     //theming textform field
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
       fillColor: Colors.black12,
-      errorStyle: TextStyle(color: error),
+      errorStyle: TextStyle(color: Dimens.color_error),
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(10),
       ),
       errorBorder: OutlineInputBorder(
-        borderSide: BorderSide(color: error),
+        borderSide: BorderSide(color: Dimens.color_error),
         borderRadius: BorderRadius.circular(10),
       ),
       focusedErrorBorder: OutlineInputBorder(
-        borderSide: BorderSide(color: error),
+        borderSide: BorderSide(color: Dimens.color_error),
         borderRadius: BorderRadius.circular(10),
       ),
+    ),
+
+    //TEXT
+    //theming textstyle for
+    textTheme: TextTheme(
+      headline1: TextStyle(fontSize: Dimens.size_heading1,fontWeight: FontWeight.normal,color: textcolor),
+      headline2: TextStyle(fontSize: Dimens.size_heading2,fontWeight: FontWeight.normal,color: textcolor),
+      headline3: TextStyle(fontSize: Dimens.size_heading3,fontWeight: FontWeight.normal,color: textcolor),
+      headline4: TextStyle(fontSize: Dimens.size_heading4,fontWeight: FontWeight.normal,color: textcolor),
+      bodyText1: TextStyle(fontSize: Dimens.size_body,fontWeight: FontWeight.normal,color: textcolor),
     ),
   );
 }
 
-const ColorScheme _moviecolorScheme = ColorScheme(
-  primary: primary,
-  primaryVariant: primary,
-  secondary: primary,
-  secondaryVariant: primary,
-  surface: primary,
-  background: primary,
-  error: error,
-  onPrimary: secondary,
-  onSecondary: secondary,
-  onSurface: primary,
-  onBackground: primary,
-  onError: error,
-  brightness: Brightness.dark,
-);
 
-const Color primary = Color(0xFFFF0000);
-const Color secondary = Color(0xFFFFFFFF);
-const Color onsurface = Color(0xFF1D1D1D);
-const Color background = Color(0xFF000000);
-const Color error = Color(0xFFFF9500);
+

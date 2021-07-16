@@ -1,37 +1,37 @@
 class Moviesnowplaying {
-  late final String poster_path;
+  late final String posterPath;
   late final bool adult;
   late final String overview;
-  late final String release_date;
-  late final String original_title;
+  late final String releaseDate;
+  late final String originalTitle;
   late final String title;
-  late final String backdrop_path;
+  late final String backdropPath;
   late final double popularity;
-  late final int vote_count;
+  late final int voteCount;
 
   Moviesnowplaying({
-    required this.poster_path,
+    required this.posterPath,
     required this.adult,
     required this.overview,
-    required this.release_date,
-    required this.original_title,
+    required this.releaseDate,
+    required this.originalTitle,
     required this.title,
-    required this.backdrop_path,
+    required this.backdropPath,
     required this.popularity,
-    required this.vote_count,
+    required this.voteCount,
   });
 
   factory Moviesnowplaying.fromjson(Map<String, dynamic> json) {
     return Moviesnowplaying(
-      poster_path: json['poster_path'],
+      posterPath: json['poster_path'],
       adult: json['adult'],
       overview: json['overview'],
-      release_date: json['release_date'],
-      original_title: json['original_title'],
+      releaseDate: json['release_date'],
+      originalTitle: json['original_title'],
       title: json['title'],
-      backdrop_path: json['backdrop_path'],
+      backdropPath: json['backdrop_path'],
       popularity: json['popularity'],
-      vote_count: json['vote_count'],
+      voteCount: json['vote_count'],
     );
   }
 }

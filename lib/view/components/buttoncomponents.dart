@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+//for containedbutton
 class ButtonContainedcomponent extends StatelessWidget {
   late final String text;
   final void Function()? function;
@@ -16,6 +17,7 @@ class ButtonContainedcomponent extends StatelessWidget {
   }
 }
 
+//for outlined button
 class ButtonOutlinedComponent extends StatelessWidget {
   late final String text;
   final void Function()? function;
