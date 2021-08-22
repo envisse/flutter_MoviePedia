@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_movie_blocpattern/view/components/textcomponents.dart';
+import 'package:flutter_movie_blocpattern/view/components/text.dart';
 
 class CardComponent extends StatelessWidget {
   late final double width;

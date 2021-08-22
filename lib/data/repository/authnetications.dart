@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:flutter_movie_blocpattern/view/pages/base_page.dart';
+import 'package:flutter_movie_blocpattern/view/pages/base.dart';
 import 'package:flutter_movie_blocpattern/main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -51,13 +51,13 @@ class Authentication {
       });
       if (respone.statusCode == 200) {
         print('success');
-        return true;
+        return false;
       } else {
         return false;
       }
     } catch (e) {
       print('error');
-      return true;
+      return false;
     }
   }
 

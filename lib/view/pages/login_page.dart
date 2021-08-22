@@ -1,21 +1,4 @@
-part of 'base_page.dart';
-
-class AuthenticationChecker extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    Authentication authentication = Authentication();
-    return FutureBuilder(
-      future: authentication.loginToken(),
-      builder: (BuildContext context, AsyncSnapshot snapshot) {
-        if (snapshot.data == false) {
-          return LoginPage();
-        } else {
-          return HomePage();
-        }
-      },
-    );
-  }
-}
+part of 'base.dart';
 
 class LoginPage extends StatefulWidget {
   @override

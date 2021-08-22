@@ -36,6 +36,7 @@ class Textheading3 extends StatelessWidget {
     return Text(
       text,
       style: Theme.of(context).textTheme.headline3,
+      
     );
   }
 }

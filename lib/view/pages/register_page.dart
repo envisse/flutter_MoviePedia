@@ -1,5 +1,5 @@
 //extend dari base_page.dart
-part of 'base_page.dart';
+part of 'base.dart';
 class Registerpage extends StatefulWidget {
   @override
   _RegisterpageState createState() => _RegisterpageState();
