@@ -4,7 +4,10 @@ import 'package:flutter_movie_blocpattern/view/components/button.dart';
 import 'package:flutter_movie_blocpattern/view/components/card.dart';
 import 'package:flutter_movie_blocpattern/view/components/text.dart';
 import 'package:flutter_movie_blocpattern/view/components/textformfield.dart';
+import 'package:flutter_movie_blocpattern/view/components/bottomnavigationbar.dart';
+import 'package:flutter_movie_blocpattern/view/components/drawer.dart';
 import 'package:flutter_movie_blocpattern/view/shared/dimens.dart';
+
 
 //list of pages
 part 'home_page.dart';

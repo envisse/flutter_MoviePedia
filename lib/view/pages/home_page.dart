@@ -1,7 +1,13 @@
 //extend dari base_page.dart
 part of 'base.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -12,7 +18,7 @@ class HomePage extends StatelessWidget {
             floating: true,
             pinned: true,
             snap: false,
-            expandedHeight: 200,
+            expandedHeight: 100,
             flexibleSpace: FlexibleSpaceBar(
               background: Container(
                 margin: EdgeInsets.all(20),
@@ -23,28 +29,41 @@ class HomePage extends StatelessWidget {
                     child: Text('widget in sliverappbar')),
               ),
             ),
+            leading: Builder(
+              builder: (context) => IconButton(
+                icon: Icon(Icons.menu),
+                tooltip: 'Menu',
+                onPressed: () => Scaffold.of(context).openDrawer(),
+              ),
+            ),
+            actions: <Widget>[
+              IconButton(
+                icon: Icon(Icons.search),
+                tooltip: 'Comment Icon',
+                onPressed: () {},
+              ), //IconButton //IconButton
+            ], //
           ),
           SliverList(
-            delegate: SliverChildListDelegate([
-              Container(
-                padding: EdgeInsets.only(top: 5, bottom: 5),
-                child: Column(
-                  children: [
-                    Container(
-                      margin: EdgeInsets.symmetric(horizontal: 10),
-                      alignment: Alignment.centerLeft,
-                      child: Textheading3(text: 'Now Playing'),
-                    ),
-                    Divider(
-                      height: 20,
-                      color: Dimens.color_primary,
-                      thickness: 2,
-                    ),
-                  ],
-                ),
+              delegate: SliverChildListDelegate([
+            Container(
+              padding: EdgeInsets.only(top: 5, bottom: 5),
+              child: Column(
+                children: [
+                  Container(
+                    margin: EdgeInsets.only(left: 10, right: 10, top: 10),
+                    alignment: Alignment.centerLeft,
+                    child: Textheading4(text: 'Now Playing'),
+                  ),
+                  Divider(
+                    height: 20,
+                    color: Dimens.color_primary,
+                    thickness: 2,
+                  ),
+                ],
               ),
-            ]),
-          ),
+            )
+          ])),
           SliverToBoxAdapter(
             child: Container(
               height: 250,
@@ -62,9 +81,83 @@ class HomePage extends StatelessWidget {
                 itemCount: 6,
               ),
             ),
-          )
+          ),
+          SliverList(
+              delegate: SliverChildListDelegate([
+            Container(
+              padding: EdgeInsets.only(top: 5, bottom: 5),
+              child: Column(
+                children: [
+                  Container(
+                    margin: EdgeInsets.only(left: 10, right: 10, top: 10),
+                    alignment: Alignment.centerLeft,
+                    child: Textheading4(text: 'Upcoming'),
+                  ),
+                  Divider(
+                    height: 20,
+                    color: Dimens.color_primary,
+                    thickness: 2,
+                  ),
+                ],
+              ),
+            ),
+          ])),
+          SliverToBoxAdapter(
+              child: Container(
+                  height: 250,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) {
+                      return CardComponent(
+                          width: 160,
+                          height: 250,
+                          imageurl:
+                              'https://image.tmdb.org/t/p/w500/acCS12FVUQ7blkC8qEbuXbsWEs2.jpg',
+                          judul: 'The walking dead',
+                          date: '3 jan 2020');
+                    },
+                    itemCount: 6,
+                  ))),
+          SliverList(
+              delegate: SliverChildListDelegate([
+            Container(
+              padding: EdgeInsets.only(top: 5, bottom: 5),
+              child: Column(
+                children: [
+                  Container(
+                    margin: EdgeInsets.only(left: 10, right: 10, top: 10),
+                    alignment: Alignment.centerLeft,
+                    child: Textheading4(text: 'Top Rated'),
+                  ),
+                  Divider(
+                    height: 20,
+                    color: Dimens.color_primary,
+                    thickness: 2,
+                  ),
+                ],
+              ),
+            ),
+          ])),
+          SliverToBoxAdapter(
+              child: Container(
+                  height: 250,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) {
+                      return CardComponent(
+                          width: 160,
+                          height: 250,
+                          imageurl:
+                              'https://image.tmdb.org/t/p/w500/9dKCd55IuTT5QRs989m9Qlb7d2B.jpg',
+                          judul: 'The walking dead',
+                          date: '3 jan 2020');
+                    },
+                    itemCount: 6,
+                  )))
         ],
       ),
+      bottomNavigationBar: Bottomnavigationbar(),
+      drawer: DrawerComponennts(),
     );
   }
 }
