@@ -9,8 +9,8 @@ class NullPage extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Textheading2(text: '404'),
-          Textbody(text: 'page not found'),
+          TextComponent(textcomp: Textcomp.heading2, text: '404'),
+          TextComponent(textcomp: Textcomp.body, text: 'Page not found'),
         ],
       ),
     );

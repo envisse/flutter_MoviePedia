@@ -1,35 +1,31 @@
 import 'package:flutter/material.dart';
 
-//for containedbutton
-class ButtonContainedcomponent extends StatelessWidget {
-  late final String text;
-  final void Function()? function;
-
-  ButtonContainedcomponent(
-      {Key? key, required this.function, required this.text})
-      : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    return ElevatedButton(
-      child: Text(text),
-      onPressed: function,
-    );
-  }
+enum ButtonComponentStyle {
+  ButtonContained,
+  ButtonOutlined,
+  ButtonText,
 }
 
-//for outlined button
-class ButtonOutlinedComponent extends StatelessWidget {
+class ButtonComponent extends StatelessWidget {
   late final String text;
   final void Function()? function;
+  final ButtonComponentStyle buttonComponentStyle;
 
-  ButtonOutlinedComponent(
-      {Key? key, required this.function, required this.text})
-      : super(key: key);
+  ButtonComponent(
+      {required this.text,
+      required this.function,
+      required this.buttonComponentStyle});
+
   @override
   Widget build(BuildContext context) {
-    return OutlinedButton(
-      onPressed: function,
-      child: Text(text),
-    );
+    if (buttonComponentStyle == ButtonComponentStyle.ButtonContained) {
+      return ElevatedButton(onPressed: function, child: Text(text));
+    } else if (buttonComponentStyle == ButtonComponentStyle.ButtonOutlined) {
+      return OutlinedButton(onPressed: function, child: Text(text));
+    } else if (buttonComponentStyle == ButtonComponentStyle.ButtonText) {
+      return TextButton(onPressed: function, child: Text(text));
+    } else {
+      return Text('button components not found');
+    }
   }
 }

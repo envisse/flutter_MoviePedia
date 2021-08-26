@@ -1,5 +1,6 @@
 //extend dari base_page.dart
 part of 'base.dart';
+
 class Registerpage extends StatefulWidget {
   @override
   _RegisterpageState createState() => _RegisterpageState();
@@ -33,9 +34,8 @@ class _RegisterpageState extends State<Registerpage> {
               ),
               Align(
                 alignment: Alignment.topLeft,
-                child: Textheading1(
-                  text: 'Crate Account',
-                ),
+                child: TextComponent(
+                    textcomp: Textcomp.heading1, text: 'Register'),
               ),
               SizedBox(
                 height: 15,
@@ -125,13 +125,13 @@ class _RegisterpageState extends State<Registerpage> {
               ),
               Align(
                 alignment: Alignment.topRight,
-                child: ButtonOutlinedComponent(
-                  text: 'register',
-                  function: () {
-                    _authentication.register(
-                        _fullname.text, _email.text, _password.text, _hp.text);
-                  },
-                ),
+                child: ButtonComponent(
+                    text: 'register',
+                    function: () {
+                      _authentication.register(_fullname.text, _email.text,
+                          _password.text, _hp.text);
+                    },
+                    buttonComponentStyle: ButtonComponentStyle.ButtonOutlined),
               )
             ],
           ),

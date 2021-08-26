@@ -47,9 +47,7 @@ class CardComponent extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 10),
             child: Align(
                 alignment: Alignment.topLeft,
-                child: Textbody(
-                  text: judul,
-                )),
+                child: TextComponent(textcomp: Textcomp.body, text: judul),),
           ),
           SizedBox(
             height: 5,
@@ -57,11 +55,9 @@ class CardComponent extends StatelessWidget {
           Container(
             padding: EdgeInsets.symmetric(horizontal: 10),
             child: Align(
-                alignment: Alignment.topLeft,
-                child: Textbody(
-                  text: date,
-                  fontsize: 11,
-                )),
+              alignment: Alignment.topLeft,
+              child: TextComponent(textcomp: Textcomp.body, text: date),
+            ),
           ),
         ],
       ),

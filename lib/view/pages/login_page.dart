@@ -29,16 +29,14 @@ class _LoginPageState extends State<LoginPage> {
                   children: [
                     Align(
                       alignment: Alignment.topLeft,
-                      child: Textheading1(
-                        text: 'Login',
-                      ),
+                      child: TextComponent(textcomp: Textcomp.heading1, text: 'LOGIN'),
                     ),
                     SizedBox(
                       height: 10,
                     ),
                     Align(
                       alignment: Alignment.topLeft,
-                      child: Textbody(text: 'please sign in to continue'),
+                      child: TextComponent(textcomp: Textcomp.body, text: 'please sign in to continue'),
                     ),
                     SizedBox(
                       height: 15,
@@ -103,16 +101,12 @@ class _LoginPageState extends State<LoginPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text('Dont have an account ?'),
-                    TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => Registerpage(),
-                            ));
-                      },
-                      child: Text('Sign up'),
-                    )
+                    ButtonComponent(
+                        text: 'sign up',
+                        function: () {
+                          Navigator.pushNamed(context, '/register');
+                        },
+                        buttonComponentStyle: ButtonComponentStyle.ButtonText)
                   ],
                 ),
               ),

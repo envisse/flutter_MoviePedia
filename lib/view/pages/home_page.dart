@@ -53,7 +53,11 @@ class _HomePageState extends State<HomePage> {
                   Container(
                     margin: EdgeInsets.only(left: 10, right: 10, top: 10),
                     alignment: Alignment.centerLeft,
-                    child: Textheading4(text: 'Now Playing'),
+                    child: TextComponent(
+                      text: 'Now Playing',
+                      textcomp: Textcomp.heading4,
+                      
+                    ),
                   ),
                   Divider(
                     height: 20,
@@ -91,7 +95,10 @@ class _HomePageState extends State<HomePage> {
                   Container(
                     margin: EdgeInsets.only(left: 10, right: 10, top: 10),
                     alignment: Alignment.centerLeft,
-                    child: Textheading4(text: 'Upcoming'),
+                    child: TextComponent(
+                      text: 'Upcoming',
+                      textcomp: Textcomp.heading4,
+                    ),
                   ),
                   Divider(
                     height: 20,
@@ -127,7 +134,10 @@ class _HomePageState extends State<HomePage> {
                   Container(
                     margin: EdgeInsets.only(left: 10, right: 10, top: 10),
                     alignment: Alignment.centerLeft,
-                    child: Textheading4(text: 'Top Rated'),
+                    child: TextComponent(
+                      text: 'Top Rated',
+                      textcomp: Textcomp.heading4,
+                    ),
                   ),
                   Divider(
                     height: 20,
