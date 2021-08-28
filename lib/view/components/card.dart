@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_movie_blocpattern/view/components/text.dart';
 
 class CardComponent extends StatelessWidget {
-  late final double width;
-  late final double height;
+  late final double? width;
+  late final double? height;
   late final String imageurl;
   late final String judul;
-  late final String date;
+  late final String? desc;
 
   CardComponent({
-    required this.width,
-    required this.height,
+    this.width,
+    this.height,
     required this.imageurl,
     required this.judul,
-    required this.date,
+    this.desc,
   });
 
   @override
@@ -22,18 +22,87 @@ class CardComponent extends StatelessWidget {
       margin: EdgeInsets.symmetric(horizontal: 10),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10), color: Colors.white12),
-      width: width,
-      height: height,
-      child: Column(
+      width: width ?? 160,
+      height: height ?? 250,
+      child: Container(
+        child: Column(
+          children: [
+            Container(
+              height: height == null ? 250 * 0.75 : height! * 0.75,
+              width: double.infinity,
+              child: ClipRRect(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(10),
+                  topRight: Radius.circular(10),
+                ),
+                child: Image.network(
+                  imageurl,
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 10),
+              child: Align(
+                alignment: Alignment.topLeft,
+                child: TextComponent(textcomp: Textcomp.body, text: judul),
+              ),
+            ),
+            SizedBox(
+              height: 5,
+            ),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 10),
+              child: Align(
+                alignment: Alignment.topLeft,
+                child: TextComponent(textcomp: Textcomp.body, text: desc ?? ''),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+///This card style are using image with 2 text beside it
+class Card2component extends StatelessWidget {
+  late final String title;
+  late final String desc;
+  late final String imageurl;
+  ///by default margin in any direction value is 4.0
+  final EdgeInsets? margin;
+  ///this width is for image
+  final double? width;
+  ///this width is for image
+  final double? height;
+
+  Card2component(
+      {Key? key,
+      required this.title,
+      required this.desc,
+      required this.imageurl,
+      this.margin, this.width, this.height})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      margin: margin ?? EdgeInsets.all(4.0),
+      color: Colors.white12,
+      elevation: 1,
+      child: Row(
         children: [
           Container(
-            height: height * 0.75,
-            width: double.infinity,
+            width: width ?? 70,
+            height: height ?? 100,
             child: ClipRRect(
               borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(10),
-                topRight: Radius.circular(10),
-              ),
+                  topLeft: Radius.circular(4.0),
+                  bottomLeft: Radius.circular(4.0)),
               child: Image.network(
                 imageurl,
                 fit: BoxFit.cover,
@@ -41,24 +110,22 @@ class CardComponent extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: 20,
+            width: 10,
           ),
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 10),
-            child: Align(
-                alignment: Alignment.topLeft,
-                child: TextComponent(textcomp: Textcomp.body, text: judul),),
-          ),
-          SizedBox(
-            height: 5,
-          ),
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 10),
-            child: Align(
-              alignment: Alignment.topLeft,
-              child: TextComponent(textcomp: Textcomp.body, text: date),
-            ),
-          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              TextComponent(
+                  textcomp: Textcomp.heading4,
+                  text: title),
+              SizedBox(
+                height: 5,
+              ),
+              TextComponent(
+                  textcomp: Textcomp.body, text: desc)
+            ],
+          )
         ],
       ),
     );

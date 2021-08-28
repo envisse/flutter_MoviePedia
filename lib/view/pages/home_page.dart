@@ -56,7 +56,6 @@ class _HomePageState extends State<HomePage> {
                     child: TextComponent(
                       text: 'Now Playing',
                       textcomp: Textcomp.heading4,
-                      
                     ),
                   ),
                   Divider(
@@ -75,12 +74,10 @@ class _HomePageState extends State<HomePage> {
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) {
                   return CardComponent(
-                      width: 160,
-                      height: 250,
                       imageurl:
                           'https://image.tmdb.org/t/p/w500/pB8BM7pdSp6B6Ih7QZ4DrQ3PmJK.jpg',
                       judul: 'The walking dead',
-                      date: '3 jan 2020');
+                      desc: '3 jan 2020');
                 },
                 itemCount: 6,
               ),
@@ -116,12 +113,10 @@ class _HomePageState extends State<HomePage> {
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context, index) {
                       return CardComponent(
-                          width: 160,
-                          height: 250,
                           imageurl:
                               'https://image.tmdb.org/t/p/w500/acCS12FVUQ7blkC8qEbuXbsWEs2.jpg',
                           judul: 'The walking dead',
-                          date: '3 jan 2020');
+                          desc: '3 jan 2020');
                     },
                     itemCount: 6,
                   ))),
@@ -155,12 +150,10 @@ class _HomePageState extends State<HomePage> {
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context, index) {
                       return CardComponent(
-                          width: 160,
-                          height: 250,
                           imageurl:
                               'https://image.tmdb.org/t/p/w500/9dKCd55IuTT5QRs989m9Qlb7d2B.jpg',
                           judul: 'The walking dead',
-                          date: '3 jan 2020');
+                          desc: '3 jan 2020');
                     },
                     itemCount: 6,
                   )))

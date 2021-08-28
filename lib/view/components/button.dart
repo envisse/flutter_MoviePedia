@@ -4,26 +4,31 @@ enum ButtonComponentStyle {
   ButtonContained,
   ButtonOutlined,
   ButtonText,
+  ButtonIcon,
 }
 
 class ButtonComponent extends StatelessWidget {
-  late final String text;
+  final String? text;
   final void Function()? function;
   final ButtonComponentStyle buttonComponentStyle;
+  final IconData? iconData;
 
   ButtonComponent(
-      {required this.text,
+      {this.text,
       required this.function,
-      required this.buttonComponentStyle});
+      required this.buttonComponentStyle,
+      this.iconData});
 
   @override
   Widget build(BuildContext context) {
     if (buttonComponentStyle == ButtonComponentStyle.ButtonContained) {
-      return ElevatedButton(onPressed: function, child: Text(text));
+      return ElevatedButton(onPressed: function, child: Text(text!));
     } else if (buttonComponentStyle == ButtonComponentStyle.ButtonOutlined) {
-      return OutlinedButton(onPressed: function, child: Text(text));
+      return OutlinedButton(onPressed: function, child: Text(text!));
     } else if (buttonComponentStyle == ButtonComponentStyle.ButtonText) {
-      return TextButton(onPressed: function, child: Text(text));
+      return TextButton(onPressed: function, child: Text(text!));
+    } else if (buttonComponentStyle == ButtonComponentStyle.ButtonIcon) {
+      return IconButton(onPressed: function, icon: Icon(iconData));
     } else {
       return Text('button components not found');
     }
