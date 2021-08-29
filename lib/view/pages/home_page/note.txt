@@ -1,0 +1,5 @@
+this file contain 3 screen in single page which is no route, page file is 'screen_page.dart' which contain bottom navigation bar and drawer
+screen name is 
+1. Home page
+2. List Movie or trend or actor? (still figure it out)
+3. Profile

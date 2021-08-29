@@ -6,10 +6,10 @@ class AppRoute {
   Route? onGenerateRoute(RouteSettings routeSettings) {
     switch (routeSettings.name) {
       case ('/'):
-        return MaterialPageRoute(builder: (context) => HomePage());
+        return MaterialPageRoute(builder: (context) => Screenpage());
 
       case ('/home'):
-        return MaterialPageRoute(builder: (context) => HomePage());
+        return MaterialPageRoute(builder: (context) => Screenpage());
 
       case ('/movie'):
         return MaterialPageRoute(
@@ -24,7 +24,7 @@ class AppRoute {
             builder: (context) => SpesificPage(page: PageList.person));
 
       case ('/logout'):
-        return MaterialPageRoute(builder: (context) => HomePage());
+        return MaterialPageRoute(builder: (context) => LoginPage());
 
       case ('/login'):
         return MaterialPageRoute(builder: (context) => LoginPage());

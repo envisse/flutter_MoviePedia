@@ -48,7 +48,7 @@ ThemeData theme() {
     ),
 
     //TEXT
-    //theming textstyle for
+    //theming textstyle
     textTheme: TextTheme(
       headline1: TextStyle(fontSize: Dimens.size_heading1,fontWeight: FontWeight.normal,color: textcolor),
       headline2: TextStyle(fontSize: Dimens.size_heading2,fontWeight: FontWeight.normal,color: textcolor),

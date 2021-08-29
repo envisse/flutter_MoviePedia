@@ -10,9 +10,13 @@ import 'package:flutter_movie_blocpattern/view/shared/dimens.dart';
 
 
 //list of pages
-part 'home_page.dart';
+part 'home_page/home_page.dart';
+part 'home_page/screen_page.dart';
+part 'home_page/profile_page.dart';
+part 'home_page/actor_page.dart';
 part 'register_page.dart';
 part 'login_page.dart';
 part 'Null_page.dart';
 part 'authentication_page.dart';
 part 'spesific_page.dart';
+
