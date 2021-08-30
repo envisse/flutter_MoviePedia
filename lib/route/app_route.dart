@@ -13,15 +13,23 @@ class AppRoute {
 
       case ('/movie'):
         return MaterialPageRoute(
-            builder: (context) => SpesificPage(page: PageList.movie));
+            builder: (context) => SpesificPage(page: SpesificPageList.movie));
+
+      case ('/movie_detail'):
+        return MaterialPageRoute(
+            builder: (context) => DetailsPage(pageList: DetailsPageList.movie));
 
       case ('/tv'):
         return MaterialPageRoute(
-            builder: (context) => SpesificPage(page: PageList.tv));
+            builder: (context) => SpesificPage(page: SpesificPageList.tv));
 
-      case ('/person'):
+      case ('/person'): //actor ?
         return MaterialPageRoute(
-            builder: (context) => SpesificPage(page: PageList.person));
+            builder: (context) => SpesificPage(page: SpesificPageList.person));
+
+      case ('/person_detail'):
+        return MaterialPageRoute(
+            builder: (context) => DetailsPage(pageList: DetailsPageList.actor));
 
       case ('/logout'):
         return MaterialPageRoute(builder: (context) => LoginPage());

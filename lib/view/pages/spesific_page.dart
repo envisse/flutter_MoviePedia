@@ -2,20 +2,20 @@ part of 'base.dart';
 
 ///this file will contain 3 page
 // tv, movie, and person
-enum PageList { tv, movie, person }
+enum SpesificPageList { tv, movie, person }
 
 //this is page ?
 class SpesificPage extends StatelessWidget {
-  final PageList page;
+  final SpesificPageList page;
   const SpesificPage({Key? key, required this.page});
 
   @override
   Widget build(BuildContext context) {
-    if (page == PageList.movie) {
+    if (page == SpesificPageList.movie) {
       return SpesificScreen(pagename: 'Movie', content: 'This is movie page');
-    } else if (page == PageList.tv) {
+    } else if (page == SpesificPageList.tv) {
       return SpesificScreen(pagename: 'Tv', content: 'This is tv page');
-    } else if (page == PageList.person) {
+    } else if (page == SpesificPageList.person) {
       return SpesificScreen(pagename: 'Person', content: 'This is person page');
     } else {
       return Text('Page not found');
