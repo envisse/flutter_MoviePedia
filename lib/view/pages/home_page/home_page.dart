@@ -67,11 +67,16 @@ class HomePage extends StatelessWidget {
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) {
-                return CardComponent(
-                    imageurl:
-                        'https://image.tmdb.org/t/p/w500/pB8BM7pdSp6B6Ih7QZ4DrQ3PmJK.jpg',
-                    judul: 'The walking dead',
-                    desc: '3 jan 2020');
+                return GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(context, '/movie_detail',arguments: DetailsArgs(id: index));
+                  },
+                  child: CardComponent(
+                      imageurl:
+                          'https://image.tmdb.org/t/p/w500/pB8BM7pdSp6B6Ih7QZ4DrQ3PmJK.jpg',
+                      judul: 'The walking dead',
+                      desc: '3 jan 2020'),
+                );
               },
               itemCount: 6,
             ),

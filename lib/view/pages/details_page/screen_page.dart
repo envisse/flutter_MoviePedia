@@ -13,9 +13,9 @@ class DetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (pageList == DetailsPageList.actor) {
-      return DetailsActorScreen();
+      return DetailsActorScreen(id: id);
     } else if (pageList == DetailsPageList.movie) {
-      return DetailsMovieScreen();
+      return DetailsMovieScreen(id: id,);
     } else {
       return Text('page not found');
     }

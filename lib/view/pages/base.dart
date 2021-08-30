@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_movie_blocpattern/data/repository/authnetications.dart';
+import 'package:flutter_movie_blocpattern/route/args/details_args.dart';
 import 'package:flutter_movie_blocpattern/view/components/button.dart';
 import 'package:flutter_movie_blocpattern/view/components/card.dart';
 import 'package:flutter_movie_blocpattern/view/components/text.dart';

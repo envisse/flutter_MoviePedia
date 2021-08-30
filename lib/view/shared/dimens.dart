@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 class Dimens {
   //margin padding
-  static const sizedbox_height = 15;
-  static const margin_global = 24;
+  static const double sizedbox_height = 15;
+  static const double margin_global = 24;
 
   //text size
   static const double size_heading1 = 48;

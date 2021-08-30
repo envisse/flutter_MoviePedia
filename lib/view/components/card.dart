@@ -73,10 +73,13 @@ class Card2component extends StatelessWidget {
   late final String title;
   late final String desc;
   late final String imageurl;
+
   ///by default margin in any direction value is 4.0
   final EdgeInsets? margin;
+
   ///this width is for image
   final double? width;
+
   ///this width is for image
   final double? height;
 
@@ -85,7 +88,9 @@ class Card2component extends StatelessWidget {
       required this.title,
       required this.desc,
       required this.imageurl,
-      this.margin, this.width, this.height})
+      this.margin,
+      this.width,
+      this.height})
       : super(key: key);
 
   @override
@@ -116,18 +121,41 @@ class Card2component extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              TextComponent(
-                  textcomp: Textcomp.heading4,
-                  text: title),
+              TextComponent(textcomp: Textcomp.heading4, text: title),
               SizedBox(
                 height: 5,
               ),
-              TextComponent(
-                  textcomp: Textcomp.body, text: desc)
+              TextComponent(textcomp: Textcomp.body, text: desc)
             ],
           )
         ],
       ),
+    );
+  }
+}
+
+///this card is for dispalying image only with BorderRaidus.all = 10
+class CardImageComponent extends StatelessWidget {
+  final double? height;
+  final double? width;
+  final String image;
+  const CardImageComponent({Key? key, required this.image, this.height, this.width}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration:
+          BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(10))),
+      height: height??250,
+      width: width??160,
+      child: ClipRRect(
+          borderRadius: BorderRadius.all(
+            Radius.circular(10),
+          ),
+          child: Image.network(
+            image,
+            fit: BoxFit.fill,
+          )),
     );
   }
 }

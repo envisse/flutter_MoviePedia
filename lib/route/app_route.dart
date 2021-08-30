@@ -5,7 +5,8 @@ import 'package:flutter_movie_blocpattern/view/pages/base.dart';
 
 class AppRoute {
   Route? onGenerateRoute(RouteSettings routeSettings) {
-    final detailsArgs = routeSettings.arguments as DetailsArgs; 
+    final detailsargs = routeSettings.arguments as DetailsArgs; 
+    
     switch (routeSettings.name) {
       case ('/'):
         return MaterialPageRoute(builder: (context) => Screenpage());
@@ -19,7 +20,7 @@ class AppRoute {
 
       case ('/movie_detail'):
         return MaterialPageRoute(
-            builder: (context) => DetailsPage(pageList: DetailsPageList.movie,id: detailsArgs.id,));
+            builder: (context) => DetailsPage(pageList: DetailsPageList.movie,id: detailsargs.id,));
 
       case ('/tv'):
         return MaterialPageRoute(
@@ -31,7 +32,7 @@ class AppRoute {
 
       case ('/person_detail'):
         return MaterialPageRoute(
-            builder: (context) => DetailsPage(pageList: DetailsPageList.actor,id: detailsArgs.id,));
+            builder: (context) => DetailsPage(pageList: DetailsPageList.actor,id: detailsargs.id,));
 
       case ('/logout'):
         return MaterialPageRoute(builder: (context) => LoginPage());

@@ -41,32 +41,7 @@ class TextComponent extends StatelessWidget {
                               .textTheme
                               .bodyText1!
                               .copyWith(fontSize: fontsize ?? Dimens.size_body),
+                              
     );
   }
 }
-
-// BAD IDEA
-// based on FontWeight class in flutter (built in)
-// To much recruitment for doing this approach
-// class _TextComponentStyle {
-//   final int index;
-//   const _TextComponentStyle._(this.index);
-
-//   static const _TextComponentStyle heading1 = _TextComponentStyle._(1);
-//   static const _TextComponentStyle heading2 = _TextComponentStyle._(2);
-//   static const _TextComponentStyle heading3 = _TextComponentStyle._(3);
-
-//   static const List<_TextComponentStyle> values = <_TextComponentStyle>[
-//     heading1,
-//     heading2,
-//     heading3
-//   ];
-
-//   String toString() {
-//     return const <int, String>{
-//       1: 'Theme.of(context).textTheme.headline1',
-//       2: 'Theme.of(context).textTheme.headline2',
-//       3: 'Theme.of(context).textTheme.headline3',
-//     }[index]!;
-//   }
-// }
