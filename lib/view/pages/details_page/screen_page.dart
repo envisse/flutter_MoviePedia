@@ -7,7 +7,8 @@ enum DetailsPageList {
 
 class DetailsPage extends StatelessWidget {
   final DetailsPageList pageList;
-  const DetailsPage({Key? key, required this.pageList}) : super(key: key);
+  final int id;
+  const DetailsPage({Key? key, required this.pageList, required this.id}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

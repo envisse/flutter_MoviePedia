@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_movie_blocpattern/view/shared/dimens.dart';
 
 //all style in here
 enum Textcomp {
@@ -35,11 +36,11 @@ class TextComponent extends StatelessWidget {
                           ? Theme.of(context)
                               .textTheme
                               .bodyText1!
-                              .copyWith(fontSize: fontsize ?? 14)
+                              .copyWith(fontSize: fontsize ?? Dimens.size_body)
                           : Theme.of(context)
                               .textTheme
                               .bodyText1!
-                              .copyWith(fontSize: fontsize ?? 14),
+                              .copyWith(fontSize: fontsize ?? Dimens.size_body),
     );
   }
 }

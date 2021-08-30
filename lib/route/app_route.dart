@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_movie_blocpattern/route/args/details_args.dart';
 import 'package:flutter_movie_blocpattern/view/pages/base.dart';
 
 class AppRoute {
   Route? onGenerateRoute(RouteSettings routeSettings) {
+    final detailsArgs = routeSettings.arguments as DetailsArgs; 
     switch (routeSettings.name) {
       case ('/'):
         return MaterialPageRoute(builder: (context) => Screenpage());
@@ -17,7 +19,7 @@ class AppRoute {
 
       case ('/movie_detail'):
         return MaterialPageRoute(
-            builder: (context) => DetailsPage(pageList: DetailsPageList.movie));
+            builder: (context) => DetailsPage(pageList: DetailsPageList.movie,id: detailsArgs.id,));
 
       case ('/tv'):
         return MaterialPageRoute(
@@ -29,7 +31,7 @@ class AppRoute {
 
       case ('/person_detail'):
         return MaterialPageRoute(
-            builder: (context) => DetailsPage(pageList: DetailsPageList.actor));
+            builder: (context) => DetailsPage(pageList: DetailsPageList.actor,id: detailsArgs.id,));
 
       case ('/logout'):
         return MaterialPageRoute(builder: (context) => LoginPage());
