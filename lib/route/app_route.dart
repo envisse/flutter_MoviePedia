@@ -34,6 +34,9 @@ class AppRoute {
         return MaterialPageRoute(
             builder: (context) => DetailsPage(pageList: DetailsPageList.actor,id: detailsargs.id,));
 
+      case('/search'):
+        return MaterialPageRoute(builder: (context) => SearchPage(),);
+
       case ('/logout'):
         return MaterialPageRoute(builder: (context) => LoginPage());
 
