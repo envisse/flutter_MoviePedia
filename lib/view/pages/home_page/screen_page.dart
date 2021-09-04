@@ -26,8 +26,18 @@ class _ScreenpageState extends State<Screenpage> {
     return Scaffold(
       appBar: _currentIndex == 0
           ? null
-          : AppBar(title: Text(_appbarname[_currentIndex].toString())),
-
+          : AppBar(
+              title: Text(_appbarname[_currentIndex].toString()),
+              actions: [
+                ButtonComponent(
+                  function: () {
+                    Navigator.pushNamed(context, '/search');
+                  },
+                  buttonComponentStyle: ButtonComponentStyle.ButtonIcon,
+                  iconData: Icons.search,
+                )
+              ],
+            ),
       body: _pages[_currentIndex],
       bottomNavigationBar: Bottomnavigationbar(
         currentIndex: _currentIndex,

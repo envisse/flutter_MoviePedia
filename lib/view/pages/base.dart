@@ -20,6 +20,7 @@ part 'login_page.dart';
 part 'Null_page.dart';
 part 'authentication_page.dart';
 part 'spesific_page.dart';
+part 'search_page.dart';
 part 'details_page/screen_page.dart';
 part 'details_page/movie_details.dart';
 part 'details_page/actor_details.dart';

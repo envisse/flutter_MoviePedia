@@ -31,11 +31,13 @@ class HomePage extends StatelessWidget {
             ),
           ),
           actions: <Widget>[
-            IconButton(
-              icon: Icon(Icons.search),
-              tooltip: 'Comment Icon',
-              onPressed: () {},
-            ), //IconButton //IconButton
+            ButtonComponent(
+                  function: () {
+                    Navigator.pushNamed(context, '/search');
+                  },
+                  buttonComponentStyle: ButtonComponentStyle.ButtonIcon,
+                  iconData: Icons.search,
+                )//IconButton //IconButton
           ], //
         ),
         SliverList(

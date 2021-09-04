@@ -5,6 +5,7 @@ class Textformfieldcomponent extends StatelessWidget {
   final String? Function(String?)? validator;
   final bool? obsecure;
   final Widget? icons;
+  final Widget? suffix;
   late final TextEditingController controller;
 
   Textformfieldcomponent({
@@ -14,6 +15,7 @@ class Textformfieldcomponent extends StatelessWidget {
     this.icons,
     this.obsecure,
     this.validator,
+    this.suffix,
   }) : super(key: key);
 
   @override
@@ -22,10 +24,10 @@ class Textformfieldcomponent extends StatelessWidget {
       controller: controller,
       validator: validator,
       obscureText: obsecure ?? false,
-      decoration: InputDecoration(      
-        labelText: hint,     
-
+      decoration: InputDecoration(
+        labelText: hint,
         prefixIcon: icons,
+        suffixIcon: suffix,
       ),
     );
   }
