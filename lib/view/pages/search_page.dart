@@ -29,16 +29,22 @@ class _SearchPageState extends State<SearchPage> {
                   child: Textformfieldcomponent(
                     hint: 'search',
                     controller: _search,
+                    suffix: ButtonComponent(
+                      function: null,
+                      buttonComponentStyle: ButtonComponentStyle.ButtonIcon,
+                      iconData: Icons.search,
+                    ),
                   )),
               SizedBox(height: 10),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: listchoice
                     .map((e) => ChoiceChip(
-                        label: Text(e.label),                                      
-                        selected: choiceselected == e.index,
-                        onSelected: (_) => setState(() => choiceselected = e.index),
-                       ))
+                          label: Text(e.label),
+                          selected: choiceselected == e.index,
+                          onSelected: (_) =>
+                              setState(() => choiceselected = e.index),
+                        ))
                     .toList(),
               )
             ])),
