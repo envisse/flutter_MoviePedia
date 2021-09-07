@@ -8,6 +8,7 @@ import 'package:flutter_movie_blocpattern/view/components/textformfield.dart';
 import 'package:flutter_movie_blocpattern/view/components/bottomnavigationbar.dart';
 import 'package:flutter_movie_blocpattern/view/components/drawer.dart';
 import 'package:flutter_movie_blocpattern/view/shared/dimens.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
 
 //list of pages
