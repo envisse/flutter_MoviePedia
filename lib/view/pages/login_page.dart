@@ -6,12 +6,25 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
   TextEditingController _email = TextEditingController();
   TextEditingController _password = TextEditingController();
-  final _formkey = GlobalKey<FormState>();
-  bool validate = true;
+  bool _validate = true;
 
-  var authentication = Authentication();
+  //button action function
+  _onLoginButtonPressed() {
+    if (_formkey.currentState!.validate()) {
+      print('coming soon with bloc pattern');
+    } else {
+      setState(() {
+        _validate = false;
+      });
+    }
+  }
+
+  _onSignupButtonPressed() {
+    Navigator.pushNamed(context, '/register');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,14 +42,17 @@ class _LoginPageState extends State<LoginPage> {
                   children: [
                     Align(
                       alignment: Alignment.topLeft,
-                      child: TextComponent(textcomp: Textcomp.heading1, text: 'LOGIN'),
+                      child: TextComponent(
+                          textcomp: Textcomp.heading1, text: 'LOGIN'),
                     ),
                     SizedBox(
                       height: 10,
                     ),
                     Align(
                       alignment: Alignment.topLeft,
-                      child: TextComponent(textcomp: Textcomp.body, text: 'please sign in to continue'),
+                      child: TextComponent(
+                          textcomp: Textcomp.body,
+                          text: 'please sign in to continue'),
                     ),
                     SizedBox(
                       height: 15,
@@ -46,7 +62,7 @@ class _LoginPageState extends State<LoginPage> {
                         validator: (value) =>
                             value!.isEmpty ? 'fill email' : null,
                         controller: _email,
-                        icons: validate
+                        icons: _validate
                             ? Icon(
                                 Icons.person,
                                 color: null,
@@ -64,7 +80,7 @@ class _LoginPageState extends State<LoginPage> {
                           value!.isEmpty ? 'fill password' : null,
                       obsecure: true,
                       controller: _password,
-                      icons: validate
+                      icons: _validate
                           ? Icon(Icons.vpn_key, color: null)
                           : Icon(Icons.vpn_key, color: Dimens.color_error),
                     ),
@@ -74,41 +90,25 @@ class _LoginPageState extends State<LoginPage> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        ElevatedButton(
-                          onPressed: () {
-                            if (_formkey.currentState!.validate()) {
-                              authentication.login(
-                                  _email.text, _password.text, context);
-                              setState(() {
-                                validate = true;
-                              });
-                            } else {
-                              setState(() {
-                                validate = false;
-                              });
-                            }
-                          },
-                          child: Text('LOGIN'),
-                        ),
+                        ButtonComponent(
+                            text: 'LOGIN',
+                            function: _onLoginButtonPressed,
+                            buttonComponentStyle:
+                                ButtonComponentStyle.ButtonContained),
                       ],
                     ),
                   ],
                 ),
               ),
-              SizedBox(
-                height: 150,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text('Dont have an account ?'),
-                    ButtonComponent(
-                        text: 'sign up',
-                        function: () {
-                          Navigator.pushNamed(context, '/register');
-                        },
-                        buttonComponentStyle: ButtonComponentStyle.ButtonText)
-                  ],
-                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text('Dont have an account ?'),
+                  ButtonComponent(
+                      text: 'sign up',
+                      function: _onSignupButtonPressed,
+                      buttonComponentStyle: ButtonComponentStyle.ButtonText),
+                ],
               ),
             ],
           ),
