@@ -1,25 +1,26 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_movie_blocpattern/route/args/details_args.dart';
+import 'package:flutter_movie_blocpattern/route/middleware/authenticationMiddleware.dart';
 import 'package:flutter_movie_blocpattern/view/pages/base.dart';
 
 class AppRoute {
+  
   Route? onGenerateRoute(RouteSettings routeSettings) {
     switch (routeSettings.name) {
       // case ('/'):
       //   return MaterialPageRoute(builder: (context) => Screenpage());
 
+      //use case -> using middleware
       case ('/'):
-        return MaterialPageRoute(builder: (context) => LoginPage());
+        return MaterialPageRoute(builder: (context) => AuthenticationMiddleware(page: HomePage()));
 
       case ('/movie'):
         return MaterialPageRoute(
             builder: (context) => SpesificPage(page: SpesificPageList.movie));
 
       case ('/movie_detail'):
-        final detailsargs = routeSettings.arguments as DetailsArgs; 
-        return MaterialPageRoute(
-            builder: (context) => DetailsPage(pageList: DetailsPageList.movie,id: detailsargs.id,));
+        final detailsargs = routeSettings.arguments as DetailsArgs;
+        return MaterialPageRoute(builder: (context) => DetailsPage(pageList: DetailsPageList.movie,id: detailsargs.id,));
 
       case ('/tv'):
         return MaterialPageRoute(
@@ -30,12 +31,11 @@ class AppRoute {
             builder: (context) => SpesificPage(page: SpesificPageList.person));
 
       case ('/person_detail'):
-        final detailsargs = routeSettings.arguments as DetailsArgs; 
-        return MaterialPageRoute(
-            builder: (context) => DetailsPage(pageList: DetailsPageList.actor,id: detailsargs.id,));
+        final detailsargs = routeSettings.arguments as DetailsArgs;
+        return MaterialPageRoute(builder: (context) => DetailsPage(pageList: DetailsPageList.actor,id: detailsargs.id,));
 
-       case('/search'):
-         return MaterialPageRoute(builder: (context) => SearchPage(),);
+      case ('/search'):
+        return MaterialPageRoute(builder: (context) => SearchPage());
 
       case ('/logout'):
         return MaterialPageRoute(builder: (context) => LoginPage());
