@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_movie_blocpattern/business_logic/bloc/bloc/authentication_bloc.dart';
 import 'package:flutter_movie_blocpattern/view/pages/base.dart';
 
 class AuthenticationMiddleware extends StatelessWidget {
@@ -8,11 +10,19 @@ class AuthenticationMiddleware extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    int i = 1;
-    if (i == 1) {
-      return LoginPage();
-    } else {
-      return page;
-    }
+    return BlocProvider<AuthenticationBloc>(
+      create: (context) {   
+        return AuthenticationBloc()..add(AppLoaded());
+      },
+      child: BlocBuilder<AuthenticationBloc, AuthenticationState>(
+        builder: (context, state) {
+          if (state is AuthenticationAuthenticated) {
+            return page;
+          } else {
+            return LoginPage();
+          }
+        },
+      ),
+    );
   }
 }
