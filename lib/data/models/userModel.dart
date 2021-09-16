@@ -4,6 +4,7 @@ class User {
   late final String username;
   late final String email;
   late final String phone;
+  late final String woy;
   late final Company company;
 
   User({

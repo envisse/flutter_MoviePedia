@@ -6,11 +6,11 @@ import 'package:flutter_movie_blocpattern/view/pages/base.dart';
 class AppRoute {
   Route? onGenerateRoute(RouteSettings routeSettings) {
     switch (routeSettings.name) {
-      // case ('/'):
-      //   return MaterialPageRoute(builder: (context) => Screenpage());
-
       case ('/'):
-        return MaterialPageRoute(builder: (context) => LoginPage());
+        return MaterialPageRoute(builder: (context) => Screenpage());
+
+      // case ('/'):
+      //   return MaterialPageRoute(builder: (context) => LoginPage());
 
       case ('/movie'):
         return MaterialPageRoute(

@@ -1,7 +1,41 @@
 //extend dari base_page.dart
 part of '../base.dart';
 
+//this is for bloc provider, make it easy to read (?)
 class HomePage extends StatelessWidget {
+  const HomePage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => MoviesBloc()..add(MoviesInitialHomeScreen()),
+      child: BlocBuilder<MoviesBloc, MoviesState>(
+        builder: (context, state) {
+          //for testing purpose it will be removed next time 
+          if (state is MovieLoading) {
+            return CircularProgressIndicator();
+          }
+          else if (state is MoviesHomeScreenSuccess) {
+            return Center(child: Column(
+              children: [
+                Text('length moviesNowPlaying is ' + state.moviesNowPlaying.length.toString()),
+                Text('length moviesToprated is ' + state.moviesToprated.length.toString()),
+                Text('length moviesUpcoming is ' + state.moviesUpcoming.length.toString()),
+              ],
+            ));
+          } 
+           else if (state is MoviesError) {
+            return Center(child: Text(state.error));
+          }
+          return Text('something wrong in bloc');
+        },
+      )
+
+    );
+  }
+}
+
+class HomePageview extends StatelessWidget {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
