@@ -1,25 +1,14 @@
-part of 'movies_bloc.dart';
+part of 'movies_cubit.dart';
 
 abstract class MoviesState extends Equatable {
   const MoviesState();
+
   @override
   List<Object> get props => [];
 }
 
 class MoviesInitial extends MoviesState {}
 
-class MovieLoading extends MoviesState {}
-
-class MoviesSuccess extends MoviesState {
-  final List<Movie> movies;
-
-  MoviesSuccess({required this.movies});
-
-  @override
-  List<Object> get props => [movies];
-}
-
-//state many movies data in home screen
 class MoviesHomeScreenSuccess extends MoviesState {
   final List<Movie> moviesNowPlaying;
   final List<Movie> moviesUpcoming;
@@ -33,6 +22,10 @@ class MoviesHomeScreenSuccess extends MoviesState {
   @override
   List<Object> get props => [moviesNowPlaying, moviesUpcoming, moviesToprated];
 }
+
+class MoviesLoading extends MoviesState {}
+
+class MovieLoading extends MoviesState{}
 
 class MoviesError extends MoviesState {
   final String error;
