@@ -5,7 +5,7 @@ enum MoviesFeature {
   MoviesNowPlaying,
   MoviesPopular,
   MoviesUpcoming,
-  MoviestopRated
+  MoviestopRated,
 }
 
 class MovieProvider {
@@ -29,7 +29,7 @@ class MovieProvider {
     } else {
       return null;
     }
-    
+
     //executed
     try {
       var rawmovies = await http.get(
@@ -38,6 +38,21 @@ class MovieProvider {
       var jsonmovies = json.decode(rawmovies.body);
       var statuscode = rawmovies.statusCode;
       return [jsonmovies, statuscode];
+    } catch (e) {
+      return (e.toString() + ' : Unexpected error');
+    }
+  }
+
+  Future rawMovieData(int id) async {
+    String link =
+        'https://api.themoviedb.org/3/movie/${id}?api_key=9e16931e0d0345a1b73821552793a73a&language=en-US';
+    try {
+      var rawmovie = await http.get(
+        Uri.parse(link),
+      );
+      var jsonmovie = json.decode(rawmovie.body);
+      var statuscode = rawmovie.statusCode;
+      return [jsonmovie, statuscode];
     } catch (e) {
       return (e.toString() + ' : Unexpected error');
     }

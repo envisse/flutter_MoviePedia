@@ -23,4 +23,14 @@ class MovieRepository {
       return null;
     }
   }
+
+  Future<Movie?> getMovieData(int id) async{
+    final rawdata = await movieProvider.rawMovieData(id);
+
+    if (rawdata[1] == 200) {
+      return Movie.singlefromjson(rawdata[0]);
+    } else {
+      return null;
+    }
+  }
 }

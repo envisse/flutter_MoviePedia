@@ -1,8 +1,31 @@
 part of '../base.dart';
 
-class DetailsMovieScreen extends StatelessWidget {
-  late final int id;
-  DetailsMovieScreen({required this.id});
+class DetailMoviePage extends StatelessWidget {
+  final int id;
+  const DetailMoviePage(this.id);
+
+  @override
+  Widget build(BuildContext context) {
+    MoviesCubit moviesCubit = MoviesCubit();
+    return BlocProvider(
+      create: (context) => moviesCubit..initmoviedetail(id),
+      child: BlocBuilder<MoviesCubit, MoviesState>(
+        builder: (context, state) {
+          if (state is MoviesLoading) {
+            return Center(child: CircularProgressIndicator());
+          } else if (state is MovieSuccess) {
+            return DetailsMovieView();
+          } else if (state is MoviesError) {
+            return Center(child: Text(state.error));
+          }
+          return Text('something wrong in bloc');
+        },
+      ),
+    );
+  }
+}
+
+class DetailsMovieView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,9 +61,7 @@ class DetailsMovieScreen extends StatelessWidget {
                           textcomp: Textcomp.body,
                           text: 'Action, thriller, horror'),
                       TextComponent(textcomp: Textcomp.body, text: '1h 41m'),
-                      TextComponent(
-                          textcomp: Textcomp.body,
-                          text: 'Id film: ' + id.toString()),
+                      TextComponent(textcomp: Textcomp.body, text: 'Id film: '),
                     ],
                   ),
                 )

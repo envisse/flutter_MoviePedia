@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_movie_blocpattern/business_logic/cubit/movies/movies_cubit.dart';
+import 'package:flutter_movie_blocpattern/data/models/Movie.dart';
 import 'package:flutter_movie_blocpattern/route/args/details_args.dart';
 import 'package:flutter_movie_blocpattern/view/components/button.dart';
 import 'package:flutter_movie_blocpattern/view/components/card.dart';

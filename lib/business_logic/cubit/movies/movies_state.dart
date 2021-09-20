@@ -10,22 +10,32 @@ abstract class MoviesState extends Equatable {
 class MoviesInitial extends MoviesState {}
 
 class MoviesHomeScreenSuccess extends MoviesState {
+  final List<Movie> moviespopular;
   final List<Movie> moviesNowPlaying;
   final List<Movie> moviesUpcoming;
   final List<Movie> moviesToprated;
 
   MoviesHomeScreenSuccess(
-      {required this.moviesNowPlaying,
+      {required this.moviespopular,
+      required this.moviesNowPlaying,
       required this.moviesUpcoming,
       required this.moviesToprated});
 
   @override
-  List<Object> get props => [moviesNowPlaying, moviesUpcoming, moviesToprated];
+  List<Object> get props => [moviesToprated, moviesNowPlaying, moviesUpcoming, moviesToprated];
+}
+
+class MovieSuccess extends MoviesState{
+  final Movie moviedetail;
+
+  MovieSuccess(this.moviedetail);
+
+    @override
+  List<Object> get props => [moviedetail]; 
 }
 
 class MoviesLoading extends MoviesState {}
 
-class MovieLoading extends MoviesState{}
 
 class MoviesError extends MoviesState {
   final String error;

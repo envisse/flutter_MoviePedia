@@ -15,7 +15,7 @@ class DetailsPage extends StatelessWidget {
     if (pageList == DetailsPageList.actor) {
       return DetailsActorScreen(id: id);
     } else if (pageList == DetailsPageList.movie) {
-      return DetailsMovieScreen(id: id,);
+      return DetailMoviePage(id,);
     } else {
       return Text('page not found');
     }

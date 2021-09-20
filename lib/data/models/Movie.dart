@@ -30,6 +30,19 @@ class Movie {
       posterPath: json['poster_path'],
     );
   }
+
+  factory Movie.singlefromjson(Map<String, dynamic> json) {
+    return Movie(
+      id: json['id'],
+      title: json['title'],
+      originalLanguage: json['original_language'],
+      releaseDate: json['release_date'],
+      adult: json['adult'],
+      overview: json['overview'],
+      posterPath: json['poster_path'],
+      genre: Genre.fromjson(json['genres']),
+    );
+  }
 }
 
 class Genre {
