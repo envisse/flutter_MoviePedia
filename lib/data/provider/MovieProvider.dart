@@ -8,6 +8,7 @@ enum MoviesFeature {
   MoviestopRated,
 }
 
+//#1 approach
 class MovieProvider {
   String apikeys = '9e16931e0d0345a1b73821552793a73a';
 
@@ -43,18 +44,11 @@ class MovieProvider {
     }
   }
 
-  Future rawMovieData(int id) async {
+  //#2 approach
+  //mending begini kayaknya
+  Future<http.Response> rawMovieData(int id) async {
     String link =
-        'https://api.themoviedb.org/3/movie/${id}?api_key=9e16931e0d0345a1b73821552793a73a&language=en-US';
-    try {
-      var rawmovie = await http.get(
-        Uri.parse(link),
-      );
-      var jsonmovie = json.decode(rawmovie.body);
-      var statuscode = rawmovie.statusCode;
-      return [jsonmovie, statuscode];
-    } catch (e) {
-      return (e.toString() + ' : Unexpected error');
-    }
+        'https://api.themoviedb.org/3/movie/$id?api_key=$apikeys&language=en-US';
+    return (await http.get(Uri.parse(link)));
   }
 }

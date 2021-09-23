@@ -42,13 +42,13 @@ class CardComponent extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: 20,
+              height: 10,
             ),
             Container(
               padding: EdgeInsets.symmetric(horizontal: 10),
               child: Align(
                 alignment: Alignment.topLeft,
-                child: TextComponent(textcomp: Textcomp.body, text: judul),
+                child: TextComponent(textcomp: Textcomp.body, text: judul,maxlines: 1,),
               ),
             ),
             SizedBox(

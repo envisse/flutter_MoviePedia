@@ -6,7 +6,9 @@ class Movie {
   late final bool adult;
   late final String overview;
   late final String posterPath;
-  final Genre? genre;
+  final int? runtime;
+  String? duration;
+  List<Genre>? genres;
 
   Movie({
     required this.id,
@@ -16,7 +18,9 @@ class Movie {
     required this.adult,
     required this.overview,
     required this.posterPath,
-    this.genre,
+    this.genres,
+    this.runtime,
+    this.duration,
   });
 
   factory Movie.fromjson(Map<String, dynamic> json) {
@@ -40,7 +44,8 @@ class Movie {
       adult: json['adult'],
       overview: json['overview'],
       posterPath: json['poster_path'],
-      genre: Genre.fromjson(json['genres']),
+      runtime: json['runtime'],
+      genres: List<Genre>.from(json["genres"].map((x) => Genre.fromjson(x))),
     );
   }
 }

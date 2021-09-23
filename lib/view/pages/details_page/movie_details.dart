@@ -7,18 +7,38 @@ class DetailMoviePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     MoviesCubit moviesCubit = MoviesCubit();
-    return BlocProvider(
-      create: (context) => moviesCubit..initmoviedetail(id),
+    CastCubit castCubit = CastCubit();
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => moviesCubit..initmoviedetail(id),
+        ),
+        BlocProvider(
+          create: (context) => castCubit..initcast(id),
+        ),
+      ],
       child: BlocBuilder<MoviesCubit, MoviesState>(
         builder: (context, state) {
           if (state is MoviesLoading) {
             return Center(child: CircularProgressIndicator());
           } else if (state is MovieSuccess) {
-            return DetailsMovieView();
+            var moviedetail = state.moviedetail;
+
+            return BlocBuilder<CastCubit, CastState>(
+              builder: (context, state) {
+                if (state is CastLoading) {
+                  return Center(child: CircularProgressIndicator());
+                } else if (state is CastSuccess) {
+                  return DetailsMovieView(moviedetail, state.castdata);
+                } else {
+                  return Text('something wrong in cast');
+                }
+              },
+            );
           } else if (state is MoviesError) {
             return Center(child: Text(state.error));
           }
-          return Text('something wrong in bloc');
+          return Text('something wrong in movie');
         },
       ),
     );
@@ -26,6 +46,10 @@ class DetailMoviePage extends StatelessWidget {
 }
 
 class DetailsMovieView extends StatelessWidget {
+  final Movie _moviedata;
+  final Cast _castdata;
+
+  const DetailsMovieView(this._moviedata, this._castdata);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,8 +68,8 @@ class DetailsMovieView extends StatelessWidget {
                 CardImageComponent(
                     height: MediaQuery.of(context).size.height * 0.30,
                     width: MediaQuery.of(context).size.width * 0.30,
-                    image:
-                        'https://image.tmdb.org/t/p/w500/acCS12FVUQ7blkC8qEbuXbsWEs2.jpg'),
+                    image: 'https://image.tmdb.org/t/p/w500/' +
+                        _moviedata.posterPath),
                 SizedBox(
                   width: 10,
                 ),
@@ -55,13 +79,22 @@ class DetailsMovieView extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       TextComponent(
-                          textcomp: Textcomp.heading4,
-                          text: 'The Quite Place part II'),
+                          textcomp: Textcomp.heading4, text: _moviedata.title),
+                      Row(
+                        children: List.generate(
+                            _moviedata.genres!.length,
+                            (index) => TextComponent(
+                                textcomp: Textcomp.body,
+                                text: (index != _moviedata.genres!.length - 1)
+                                    ? _moviedata.genres![index].name + ', '
+                                    : _moviedata.genres![index].name)),
+                      ),
                       TextComponent(
                           textcomp: Textcomp.body,
-                          text: 'Action, thriller, horror'),
-                      TextComponent(textcomp: Textcomp.body, text: '1h 41m'),
-                      TextComponent(textcomp: Textcomp.body, text: 'Id film: '),
+                          text: _moviedata.duration.toString()),
+                      TextComponent(
+                          textcomp: Textcomp.body,
+                          text: 'Release Date: ' + _moviedata.releaseDate),
                     ],
                   ),
                 )
@@ -83,14 +116,11 @@ class DetailsMovieView extends StatelessWidget {
                   height: 20,
                 ),
                 TextComponent(
-                    textcomp: Textcomp.body,
-                    text:
-                        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.'),
+                    textcomp: Textcomp.body, text: _moviedata.overview),
                 SizedBox(
                   height: 20,
                 ),
-                TextComponent(
-                    textcomp: Textcomp.heading4, text: 'Top Billed Cast'),
+                TextComponent(textcomp: Textcomp.heading4, text: 'Cast'),
                 SizedBox(
                   height: 20,
                 ),
@@ -110,9 +140,9 @@ class DetailsMovieView extends StatelessWidget {
                   child: CardComponent(
                     height: 230,
                     imageurl:
-                        'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/cgoy7t5Ve075naBPcewZrc08qGw.jpg',
-                    judul: 'Dwayne Johnson',
-                    desc: 'Frank Wolff',
+                        'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${_castdata.cast[index].profilePath}',
+                    judul: _castdata.cast[index].name, //realname
+                    desc: _castdata.cast[index].character, //as
                   ),
                 );
               },
