@@ -1,12 +1,13 @@
-class Cast {
-  Cast({
+//model for credits people in single movie
+class CastPeople {
+  CastPeople({
     required this.cast,
   });
 
   List<CastElement> cast;
 
-  factory Cast.fromJson(Map<String, dynamic> json) {
-    return Cast(
+  factory CastPeople.fromJson(Map<String, dynamic> json) {
+    return CastPeople(
       cast: List<CastElement>.from(
           json["cast"].map((x) => CastElement.fromJson(x))),
     );
@@ -18,22 +19,19 @@ class CastElement {
     required this.id,
     required this.name,
     required this.profilePath,
-    required this.castId,
     required this.character,
   });
 
   int id;
   String name;
-  String profilePath;
-  int castId;
+  String? profilePath;
   String character;
 
   factory CastElement.fromJson(Map<String, dynamic> json) {
     return CastElement(
       id: json["id"],
       name: json["name"],
-      profilePath: json["profile_path"] == null ? 'none' : json["profile_path"],
-      castId: json["cast_id"] == null ? 'none' : json["cast_id"],
+      profilePath: json["profile_path"] == null ? null : json["profile_path"],
       character: json["character"] == null ? 'none' : json["character"],
     );
   }

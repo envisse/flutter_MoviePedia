@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter_movie_blocpattern/data/models/Movie.dart';
-import 'package:flutter_movie_blocpattern/data/provider/MovieProvider.dart';
+import 'package:flutter_movie_blocpattern/data/provider/barrel.dart';
 
 class MovieRepository {
   MovieProvider movieProvider = MovieProvider();

@@ -6,15 +6,13 @@ class DetailMoviePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    MoviesCubit moviesCubit = MoviesCubit();
-    CastCubit castCubit = CastCubit();
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => moviesCubit..initmoviedetail(id),
+          create: (context) => MoviesCubit()..initmoviedetail(id),
         ),
         BlocProvider(
-          create: (context) => castCubit..initcast(id),
+          create: (context) => CastCubit()..initCastPeople(id),
         ),
       ],
       child: BlocBuilder<MoviesCubit, MoviesState>(
@@ -28,7 +26,7 @@ class DetailMoviePage extends StatelessWidget {
               builder: (context, state) {
                 if (state is CastLoading) {
                   return Center(child: CircularProgressIndicator());
-                } else if (state is CastSuccess) {
+                } else if (state is CastSuccessPeople) {
                   return DetailsMovieView(moviedetail, state.castdata);
                 } else {
                   return Text('something wrong in cast');
@@ -47,7 +45,7 @@ class DetailMoviePage extends StatelessWidget {
 
 class DetailsMovieView extends StatelessWidget {
   final Movie _moviedata;
-  final Cast _castdata;
+  final CastPeople _castdata;
 
   const DetailsMovieView(this._moviedata, this._castdata);
   @override
@@ -67,7 +65,7 @@ class DetailsMovieView extends StatelessWidget {
               children: [
                 CardImageComponent(
                     height: MediaQuery.of(context).size.height * 0.30,
-                    width: MediaQuery.of(context).size.width * 0.30,
+                    width: MediaQuery.of(context).size.width * 0.35,
                     image: 'https://image.tmdb.org/t/p/w500/' +
                         _moviedata.posterPath),
                 SizedBox(
@@ -76,11 +74,11 @@ class DetailsMovieView extends StatelessWidget {
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       TextComponent(
-                          textcomp: Textcomp.heading4, text: _moviedata.title),
-                      Row(
+                          textcomp: Textcomp.heading3, text: _moviedata.title),
+                      Wrap(
                         children: List.generate(
                             _moviedata.genres!.length,
                             (index) => TextComponent(
@@ -91,10 +89,10 @@ class DetailsMovieView extends StatelessWidget {
                       ),
                       TextComponent(
                           textcomp: Textcomp.body,
-                          text: _moviedata.duration.toString()),
+                          text: 'Duration : ' + _moviedata.duration.toString()),
                       TextComponent(
                           textcomp: Textcomp.body,
-                          text: 'Release Date: ' + _moviedata.releaseDate),
+                          text: 'Release Date: ' + _moviedata.releaseDate!),
                     ],
                   ),
                 )
@@ -116,7 +114,7 @@ class DetailsMovieView extends StatelessWidget {
                   height: 20,
                 ),
                 TextComponent(
-                    textcomp: Textcomp.body, text: _moviedata.overview),
+                    textcomp: Textcomp.body, text: _moviedata.overview.toString()),
                 SizedBox(
                   height: 20,
                 ),
@@ -135,12 +133,13 @@ class DetailsMovieView extends StatelessWidget {
                 return GestureDetector(
                   onTap: () {
                     Navigator.pushNamed(context, '/person_detail',
-                        arguments: DetailsArgs(id: index));
+                        arguments: DetailsArgs(id: _castdata.cast[index].id));
                   },
                   child: CardComponent(
-                    height: 230,
+                    height: 230,                  
                     imageurl:
-                        'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${_castdata.cast[index].profilePath}',
+                    (_castdata.cast[index].profilePath != null) ? 
+                        'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${_castdata.cast[index].profilePath}' : null,
                     judul: _castdata.cast[index].name, //realname
                     desc: _castdata.cast[index].character, //as
                   ),

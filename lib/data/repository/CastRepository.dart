@@ -1,21 +1,25 @@
 import 'dart:convert';
 
-import 'package:flutter_movie_blocpattern/data/models/Cast.dart';
-import 'package:flutter_movie_blocpattern/data/provider/CastProvider.dart';
+import 'package:flutter_movie_blocpattern/data/models/CastMovie.dart';
+import 'package:flutter_movie_blocpattern/data/models/CastPeople.dart';
+import 'package:flutter_movie_blocpattern/data/provider/barrel.dart';
 
 class CastRepository {
   CastProvider castProvider = CastProvider();
   
-  Future<Cast?> getCastData(int id) async {
-    final rawdata = await castProvider.rawcCastData(id);
-    if (rawdata.statusCode == 200) {
-      var data = json.decode(rawdata.body);
-      var model = Cast.fromJson(data);
-      
-      return model;
+  Future<CastPeople?> getCastDataPeople(int id) async {
+    final rawdata = await castProvider.rawCastDataPeople(id);
+    if (rawdata.statusCode == 200) {  
+      return CastPeople.fromJson(json.decode(rawdata.body));
     }
-    else{
       return null;
+  }
+
+  Future<CastMovie?> getCastDataMovie(int id) async{
+    final rawdata = await castProvider.rawCastDataMovie(id);
+    if (rawdata.statusCode == 200) {
+      return (CastMovie.fromjson(json.decode(rawdata.body)));
     }
+    return null;
   }
 }

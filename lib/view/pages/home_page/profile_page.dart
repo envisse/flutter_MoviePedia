@@ -5,6 +5,7 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //TODO : Change to 'setting' Page
     return Center(
       child: Text('this is profile page'),
     );

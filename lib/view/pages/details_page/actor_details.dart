@@ -6,6 +6,51 @@ class DetailsActorScreen extends StatelessWidget {
   DetailsActorScreen({required this.id});
   @override
   Widget build(BuildContext context) {
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => PeopleCubit()..initialPeopleDetail(id),
+        ),
+        BlocProvider(
+          create: (context) => CastCubit()..initCastMovie(id),
+        ),
+      ],
+      child: BlocBuilder<PeopleCubit, PeopleState>(
+        builder: (context, state) {
+          if (state is PeopleLoading) {
+            return Center(child: CircularProgressIndicator());
+          } else if (state is PeopleSuccess) {
+            return BlocBuilder<CastCubit, CastState>(
+              builder: (context, state) {
+                if (state is CastLoading) {
+                  return Center(child: CircularProgressIndicator());
+                } else if (state is CastSuccessMovie) {
+                  return Text('success fetching all');
+                } else if (state is CastError){
+                  return Text(state.error);
+                }
+                return Text('something wrong in cast bloc');
+              },
+            );
+          } else if (state is PeopleError) {
+            return Center(
+              child: Text(state.message),
+            );
+          }
+          return Text('something wrong');
+        },
+      ),
+    );
+  }
+}
+
+class DetailsActorPage extends StatelessWidget {
+  late final People _people;
+  late final CastMovie _castMovie;
+  DetailsActorPage(this._people, this._castMovie);
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black,
@@ -21,9 +66,10 @@ class DetailsActorScreen extends StatelessWidget {
               children: [
                 CardImageComponent(
                     height: MediaQuery.of(context).size.height * 0.30,
-                    width: MediaQuery.of(context).size.width * 0.30,
-                    image:
-                        'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/cgoy7t5Ve075naBPcewZrc08qGw.jpg'),
+                    width: MediaQuery.of(context).size.width * 0.40,
+                    image: (_people.profilePath != null)
+                        ? 'https://www.themoviedb.org/t/p/w500/${_people.profilePath}'
+                        : null),
                 SizedBox(
                   width: 10,
                 ),
@@ -34,16 +80,16 @@ class DetailsActorScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         TextComponent(
-                            textcomp: Textcomp.heading4, text: 'Dwayne Johnson'),
+                            textcomp: Textcomp.heading3, text: _people.name),
                         TextComponent(
                             textcomp: Textcomp.body,
-                            text: 'Birthday : 1972-05-02 (49 years old)'),
+                            text: 'Birthday : ${_people.birthday}'),
                         TextComponent(
                             textcomp: Textcomp.body,
-                            text: 'Place of Birth : Hayward, California, USAdawdawdawd'),
+                            text: 'Place of Birth : ${_people.placeOfBirth}'),
                         TextComponent(
                             textcomp: Textcomp.body,
-                            text: 'Id actor: ' + id.toString()),
+                            text: 'Gender: ${_people.gender}'),
                       ],
                     ),
                   ),
@@ -68,8 +114,7 @@ class DetailsActorScreen extends StatelessWidget {
                 Container(
                   child: TextComponent(
                       textcomp: Textcomp.body,
-                      text:
-                          "An American and Canadian actor, producer and semi-retired professional wrestler, signed with WWE. Johnson is half-Black and half-Samoan. His father, Rocky Johnson, is a Black Canadian, from Nova Scotia, and part of the first Black tag team champions in WWE history back when it was known as the WWF along with Tony Atlas. His mother is Samoan and the daughter of Peter Maivia, who was also a pro wrestler. Maivia's wife, Lia Maivia, was one of wrestling's few female promoters, taking over Polynesian Pacific Pro Wrestling after her husband's death in 1982, until 1988. Through his mother, he is considered a non-blood relative of the Anoa'i wrestling family. On March 29, 2008, The Rock inducted his father and his grandfather into the WWE Hall of Fame."),
+                      text: _people.biography.toString()),
                 ),
                 SizedBox(
                   height: 20,
@@ -89,9 +134,9 @@ class DetailsActorScreen extends StatelessWidget {
                 return CardComponent(
                   height: 230,
                   imageurl:
-                      'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/wurKlC3VKUgcfsn0K51MJYEleS2.jpg',
-                  judul: 'Furious 7',
-                  desc: 'Frank Wolff',
+                      'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${_castMovie.movies[index].posterPath}',
+                  judul: _castMovie.movies[index].title,
+                  desc: _castMovie.movies[index].releaseDate,
                 );
               },
               itemCount: 10,

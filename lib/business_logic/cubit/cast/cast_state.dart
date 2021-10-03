@@ -11,18 +11,24 @@ class CastInitial extends CastState {}
 
 class CastLoading extends CastState {}
 
-class CastSuccess extends CastState {
-  final Cast castdata;
-
-  CastSuccess(this.castdata);
+class CastSuccessPeople extends CastState {
+  final CastPeople castdata;
+  CastSuccessPeople(this.castdata);
 
   @override
   List<Object> get props => [castdata];
 }
 
+class CastSuccessMovie extends CastState {
+  final CastMovie castMovie;
+  CastSuccessMovie(this.castMovie);
+
+  @override
+  List<Object> get props => [castMovie];
+}
+
 class CastError extends CastState {
   final String error;
-
   CastError(this.error);
 
   @override

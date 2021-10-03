@@ -4,14 +4,14 @@ import 'package:flutter_movie_blocpattern/view/components/text.dart';
 class CardComponent extends StatelessWidget {
   late final double? width;
   late final double? height;
-  late final String imageurl;
+  late final String? imageurl;
   late final String judul;
   late final String? desc;
 
   CardComponent({
     this.width,
     this.height,
-    required this.imageurl,
+    this.imageurl,
     required this.judul,
     this.desc,
   });
@@ -35,10 +35,10 @@ class CardComponent extends StatelessWidget {
                   topLeft: Radius.circular(10),
                   topRight: Radius.circular(10),
                 ),
-                child: Image.network(
-                  imageurl,
+                child: (imageurl != null ) ?Image.network(
+                  imageurl.toString(),
                   fit: BoxFit.cover,
-                ),
+                ) : Icon(Icons.person),
               ),
             ),
             SizedBox(
@@ -138,7 +138,7 @@ class Card2component extends StatelessWidget {
 class CardImageComponent extends StatelessWidget {
   final double? height;
   final double? width;
-  final String image;
+  final String? image;
   const CardImageComponent({Key? key, required this.image, this.height, this.width}) : super(key: key);
 
   @override
@@ -152,10 +152,10 @@ class CardImageComponent extends StatelessWidget {
           borderRadius: BorderRadius.all(
             Radius.circular(10),
           ),
-          child: Image.network(
-            image,
+          child: (image != null) ? Image.network(
+            image.toString(),
             fit: BoxFit.fill,
-          )),
+          ): Icon(Icons.person)),
     );
   }
 }
