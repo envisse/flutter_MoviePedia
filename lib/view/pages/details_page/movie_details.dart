@@ -115,7 +115,11 @@ class DetailsMovieView extends StatelessWidget {
           ),
           BlocBuilder<CastCubit, CastState>(
             builder: (context, state) {
-              if (state is CastSuccessPeople) {
+              if (state is CastLoading) {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              } else if (state is CastSuccessPeople) {
                 return Container(
                   height: 250,
                   child: ListView.builder(
@@ -138,11 +142,17 @@ class DetailsMovieView extends StatelessWidget {
                         ),
                       );
                     },
-                    itemCount: 10,
+                    itemCount: state.castdata.cast.length > 10 ? 10 : state.castdata.cast.length,
                   ),
                 );
+              } else if (state is CastError) {
+                return Center(
+                  child: Text(state.error),
+                );
               }
-              return SizedBox.shrink();
+              return Center(
+                child: Text('Undefined Error'),
+              );
             },
           )
         ],

@@ -108,15 +108,7 @@ class DetailsActorPage extends StatelessWidget {
                 SizedBox(
                   height: 20,
                 ),
-                BlocBuilder<CastCubit, CastState>(
-                  builder: (context, state) {
-                    if (state is CastSuccessMovie) {
-                      return TextComponent(
-                          textcomp: Textcomp.heading4, text: 'Known For');
-                    }
-                    return SizedBox.shrink();
-                  },
-                ),
+                TextComponent(textcomp: Textcomp.heading4, text: 'Known For'),
                 SizedBox(
                   height: 20,
                 ),
@@ -125,9 +117,39 @@ class DetailsActorPage extends StatelessWidget {
           ),
           BlocBuilder<CastCubit, CastState>(
             builder: (context, state) {
-              if (state is CastSuccessMovie) {
-                return Text('Amount data : ${state.castMovie.movies.length.toString()}');
-              } else if (state is CastError){
+              if (state is CastLoading) {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              } else if (state is CastSuccessMovie) {
+                return Container(
+                  height: 250,
+                  child: ListView.builder(                  
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) {
+                      return GestureDetector(
+                        // onTap: () {
+                        //   Navigator.pushNamed(
+                        //     context,
+                        //     '/movie_detail',
+                        //     arguments: DetailsArgs(id: 1),
+                        //   );
+                        // },
+                        child: CardComponent(
+                          height: 230,
+                          imageurl: (state.castMovie.movies[index].posterPath !=
+                                  null)
+                              ? 'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${state.castMovie.movies[index].posterPath}'
+                              : null,
+                          judul: state.castMovie.movies[index].title,
+                          desc: state.castMovie.movies[index].releaseDate,
+                        ),
+                      );
+                    },
+                    itemCount: state.castMovie.movies.length > 10 ? 10 : state.castMovie.movies.length,
+                  ),
+                );
+              } else if (state is CastError) {
                 return Text(state.error);
               }
               return Text('Nothing');
