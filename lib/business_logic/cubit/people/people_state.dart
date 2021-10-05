@@ -20,8 +20,9 @@ class PeopleSuccess extends PeopleState {
 }
 
 class PeoplesSuccess extends PeopleState {
+  final int pagenumber;
   final List<People> peoples;
-  PeoplesSuccess(this.peoples);
+  PeoplesSuccess({required this.peoples,required this.pagenumber});
 
   @override
   List<Object> get props => [peoples];

@@ -63,7 +63,7 @@ class HomePageview extends StatelessWidget {
                             child: Stack(
                               children: <Widget>[
                                 Image.network(
-                                  'https://image.tmdb.org/t/p/w500'+i.posterPath,
+                                  'https://image.tmdb.org/t/p/w500'+i.posterPath.toString(),
                                   fit: BoxFit.cover,
                                   width: double.infinity,
                                 ),
@@ -152,7 +152,7 @@ class HomePageview extends StatelessWidget {
                     },
                     child: CardComponent(
                         imageurl:
-                            'https://image.tmdb.org/t/p/w500' + moviesnowplaying[index].posterPath,
+                            'https://image.tmdb.org/t/p/w500' + moviesnowplaying[index].posterPath.toString(),
                         judul: moviesnowplaying[index].title,
                         desc: moviesnowplaying[index].releaseDate),
                   );
@@ -192,7 +192,7 @@ class HomePageview extends StatelessWidget {
                     itemBuilder: (context, index) {
                       return CardComponent(
                           imageurl:
-                              'https://image.tmdb.org/t/p/w500'+moviesupcoming[index].posterPath,
+                              'https://image.tmdb.org/t/p/w500'+moviesupcoming[index].posterPath.toString(),
                           judul: moviesupcoming[index].title,
                           desc: moviesupcoming[index].releaseDate);
                     },
@@ -229,7 +229,7 @@ class HomePageview extends StatelessWidget {
                     itemBuilder: (context, index) {
                       return CardComponent(
                           imageurl:
-                              'https://image.tmdb.org/t/p/w500'+moviestoprated[index].posterPath,
+                              'https://image.tmdb.org/t/p/w500'+moviestoprated[index].posterPath.toString(),
                           judul: moviestoprated[index].title,
                           desc: moviestoprated[index].releaseDate);
                     },

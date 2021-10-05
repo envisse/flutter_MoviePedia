@@ -5,7 +5,7 @@ class Movie {
   late final String? releaseDate;
   late final bool? adult;
   late final String? overview;
-  late final String posterPath;
+  late final String? posterPath;
   final int? runtime;
   String? duration;
   List<Genre>? genres;
@@ -17,7 +17,7 @@ class Movie {
     this.releaseDate,
     this.adult,
     this.overview,
-    required this.posterPath,
+    this.posterPath,
     this.genres,
     this.runtime,
     this.duration,
@@ -36,7 +36,7 @@ class Movie {
     return Movie(
         id: json['id'],
         title: json['title'],
-        posterPath: json['poster_path'],
+        posterPath: json['poster_path'] == null ? null : json['poster_path'],
         releaseDate: json['release_date']);
   }
 

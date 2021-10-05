@@ -10,7 +10,7 @@ class CastProvider {
   }
   
   Future<http.Response> rawCastDataMovie(int id) async{
-    String link = 'https://api.themoviedb.org/3/movie/$id/credits?api_key=$apikeys&language=en-US';
+    String link = 'https://api.themoviedb.org/3/person/$id/credits?api_key=$apikeys&language=en-US';
     return (await http.get(Uri.parse(link)));
   }
 }

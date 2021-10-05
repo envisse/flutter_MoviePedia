@@ -20,19 +20,7 @@ class DetailMoviePage extends StatelessWidget {
           if (state is MoviesLoading) {
             return Center(child: CircularProgressIndicator());
           } else if (state is MovieSuccess) {
-            var moviedetail = state.moviedetail;
-
-            return BlocBuilder<CastCubit, CastState>(
-              builder: (context, state) {
-                if (state is CastLoading) {
-                  return Center(child: CircularProgressIndicator());
-                } else if (state is CastSuccessPeople) {
-                  return DetailsMovieView(moviedetail, state.castdata);
-                } else {
-                  return Text('something wrong in cast');
-                }
-              },
-            );
+            return DetailsMovieView(state.moviedetail);
           } else if (state is MoviesError) {
             return Center(child: Text(state.error));
           }
@@ -45,9 +33,8 @@ class DetailMoviePage extends StatelessWidget {
 
 class DetailsMovieView extends StatelessWidget {
   final Movie _moviedata;
-  final CastPeople _castdata;
 
-  const DetailsMovieView(this._moviedata, this._castdata);
+  const DetailsMovieView(this._moviedata);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,7 +54,7 @@ class DetailsMovieView extends StatelessWidget {
                     height: MediaQuery.of(context).size.height * 0.30,
                     width: MediaQuery.of(context).size.width * 0.35,
                     image: 'https://image.tmdb.org/t/p/w500/' +
-                        _moviedata.posterPath),
+                        _moviedata.posterPath.toString()),
                 SizedBox(
                   width: 10,
                 ),
@@ -114,7 +101,8 @@ class DetailsMovieView extends StatelessWidget {
                   height: 20,
                 ),
                 TextComponent(
-                    textcomp: Textcomp.body, text: _moviedata.overview.toString()),
+                    textcomp: Textcomp.body,
+                    text: _moviedata.overview.toString()),
                 SizedBox(
                   height: 20,
                 ),
@@ -125,28 +113,37 @@ class DetailsMovieView extends StatelessWidget {
               ],
             ),
           ),
-          Container(
-            height: 250,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (context, index) {
-                return GestureDetector(
-                  onTap: () {
-                    Navigator.pushNamed(context, '/person_detail',
-                        arguments: DetailsArgs(id: _castdata.cast[index].id));
-                  },
-                  child: CardComponent(
-                    height: 230,                  
-                    imageurl:
-                    (_castdata.cast[index].profilePath != null) ? 
-                        'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${_castdata.cast[index].profilePath}' : null,
-                    judul: _castdata.cast[index].name, //realname
-                    desc: _castdata.cast[index].character, //as
+          BlocBuilder<CastCubit, CastState>(
+            builder: (context, state) {
+              if (state is CastSuccessPeople) {
+                return Container(
+                  height: 250,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) {
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.pushNamed(context, '/person_detail',
+                              arguments: DetailsArgs(
+                                  id: state.castdata.cast[index].id));
+                        },
+                        child: CardComponent(
+                          height: 230,
+                          imageurl: (state.castdata.cast[index].profilePath !=
+                                  null)
+                              ? 'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${state.castdata.cast[index].profilePath}'
+                              : null,
+                          judul: state.castdata.cast[index].name, //realname
+                          desc: state.castdata.cast[index].character, //as
+                        ),
+                      );
+                    },
+                    itemCount: 10,
                   ),
                 );
-              },
-              itemCount: 10,
-            ),
+              }
+              return SizedBox.shrink();
+            },
           )
         ],
       ),

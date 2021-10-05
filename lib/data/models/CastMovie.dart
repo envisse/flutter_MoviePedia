@@ -8,7 +8,7 @@ class CastMovie {
 
   factory CastMovie.fromjson(Map<String, dynamic> json) {
     return CastMovie(
-        movies:
-            List<Movie>.from(json["cast"].map((x) => Movie.castfromjson(x))));
+        movies: List<Movie>.from(
+            json["cast"].map((x) => Movie.castfromjson(x))));
   }
 }

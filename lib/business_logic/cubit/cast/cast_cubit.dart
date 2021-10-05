@@ -31,6 +31,7 @@ class CastCubit extends Cubit<CastState> {
       if (fetch != null) {
         emit(CastSuccessMovie(fetch));
       } else {
+        emit(CastError('No Data'));
       }
     } catch (e) {
       emit(CastError(e.toString()));

@@ -13,7 +13,7 @@ class Actorpage extends StatelessWidget {
           if (state is PeopleLoading) {
             return Center(child: CircularProgressIndicator());
           } else if (state is PeoplesSuccess) {
-            return Center(child: Text('success fetch data'));
+            return ActorView();
           } else if (state is PeopleError) {
             return Center(child: Text(state.message));
           }
@@ -24,27 +24,78 @@ class Actorpage extends StatelessWidget {
   }
 }
 
-// class ActorView extends StatelessWidget {
-//   final List<People> _peoples;
-
-//   ActorView(this._peoples);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return SingleChildScrollView(
-//         scrollDirection: Axis.vertical,
-//         child: BlocBuilder<PeopleCubit, PeopleState>(builder: (context, state) {
-//           return Wrap(
-//               spacing: 1,
-//               runSpacing: 20,
-//               children: List.generate(
-//                   _peoples.length,
-//                   (index) => CardComponent(
-//                         judul: _peoples[index].name,
-//                         desc: null,
-//                         width: MediaQuery.of(context).size.width * 0.28,
-//                         height: MediaQuery.of(context).size.height * 0.22,
-//                       )));
-//         }));
-//   }
-// }
+// ignore: must_be_immutable
+class ActorView extends StatelessWidget {
+  int page = 2;
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      scrollDirection: Axis.vertical,
+      child: Column(
+        children: [
+          BlocBuilder<PeopleCubit, PeopleState>(
+            builder: (context, state) {
+              if (state is PeoplesSuccess) {
+                return Wrap(
+                  spacing: 1,
+                  runSpacing: 20,
+                  children: List.generate(
+                      state.peoples.length,
+                      (index) => GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(context, '/person_detail',
+                                arguments:
+                                    DetailsArgs(id: state.peoples[index].id));
+                          },
+                          child: CardComponent(
+                            judul: state.peoples[index].name,
+                            desc: state.peoples[index].id.toString(),
+                            imageurl: (state.peoples[index].profilePath != null)
+                                ? 'https://www.themoviedb.org/t/p/w500/${state.peoples[index].profilePath}'
+                                : null,
+                            width: MediaQuery.of(context).size.width * 0.28,
+                            height: MediaQuery.of(context).size.height * 0.25,
+                          ))),
+                );
+              }
+              return Actorpage();
+            },
+          ),
+          BlocBuilder<PeopleCubit, PeopleState>(
+            builder: (context, state) {
+              if (state is PeoplesSuccess) {
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ButtonComponent(
+                      function: (state.pagenumber == 1)
+                          ? null
+                          : () {
+                              context
+                                  .read<PeopleCubit>()
+                                  .initialPeoples(state.pagenumber - 1);
+                            },
+                      buttonComponentStyle: ButtonComponentStyle.ButtonText,
+                      text: 'Previous',
+                    ),
+                    Text(state.pagenumber.toString()),
+                    ButtonComponent(
+                      function: () {
+                        context
+                            .read<PeopleCubit>()
+                            .initialPeoples(state.pagenumber + 1);
+                      },
+                      buttonComponentStyle: ButtonComponentStyle.ButtonText,
+                      text: 'Next',
+                    )
+                  ],
+                );
+              }
+              return Actorpage();
+            },
+          )
+        ],
+      ),
+    );
+  }
+}

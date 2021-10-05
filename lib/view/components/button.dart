@@ -22,11 +22,11 @@ class ButtonComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (buttonComponentStyle == ButtonComponentStyle.ButtonContained) {
-      return ElevatedButton(onPressed: function, child: Text(text!));
+      return ElevatedButton(onPressed: function, child: Text(text.toString()));
     } else if (buttonComponentStyle == ButtonComponentStyle.ButtonOutlined) {
-      return OutlinedButton(onPressed: function, child: Text(text!));
+      return OutlinedButton(onPressed: function, child: Text(text.toString()));
     } else if (buttonComponentStyle == ButtonComponentStyle.ButtonText) {
-      return TextButton(onPressed: function, child: Text(text!));
+      return TextButton(onPressed: function, child: Text(text.toString()));
     } else if (buttonComponentStyle == ButtonComponentStyle.ButtonIcon) {
       return IconButton(onPressed: function, icon: Icon(iconData));
     } else {

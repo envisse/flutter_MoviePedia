@@ -20,18 +20,7 @@ class DetailsActorScreen extends StatelessWidget {
           if (state is PeopleLoading) {
             return Center(child: CircularProgressIndicator());
           } else if (state is PeopleSuccess) {
-            return BlocBuilder<CastCubit, CastState>(
-              builder: (context, state) {
-                if (state is CastLoading) {
-                  return Center(child: CircularProgressIndicator());
-                } else if (state is CastSuccessMovie) {
-                  return Text('success fetching all');
-                } else if (state is CastError){
-                  return Text(state.error);
-                }
-                return Text('something wrong in cast bloc');
-              },
-            );
+            return DetailsActorPage(state.people);
           } else if (state is PeopleError) {
             return Center(
               child: Text(state.message),
@@ -46,8 +35,8 @@ class DetailsActorScreen extends StatelessWidget {
 
 class DetailsActorPage extends StatelessWidget {
   late final People _people;
-  late final CastMovie _castMovie;
-  DetailsActorPage(this._people, this._castMovie);
+
+  DetailsActorPage(this._people);
 
   @override
   Widget build(BuildContext context) {
@@ -83,7 +72,7 @@ class DetailsActorPage extends StatelessWidget {
                             textcomp: Textcomp.heading3, text: _people.name),
                         TextComponent(
                             textcomp: Textcomp.body,
-                            text: 'Birthday : ${_people.birthday}'),
+                            text: 'Born Date : ${_people.birthday}'),
                         TextComponent(
                             textcomp: Textcomp.body,
                             text: 'Place of Birth : ${_people.placeOfBirth}'),
@@ -119,28 +108,30 @@ class DetailsActorPage extends StatelessWidget {
                 SizedBox(
                   height: 20,
                 ),
-                TextComponent(textcomp: Textcomp.heading4, text: 'Known For'),
+                BlocBuilder<CastCubit, CastState>(
+                  builder: (context, state) {
+                    if (state is CastSuccessMovie) {
+                      return TextComponent(
+                          textcomp: Textcomp.heading4, text: 'Known For');
+                    }
+                    return SizedBox.shrink();
+                  },
+                ),
                 SizedBox(
                   height: 20,
                 ),
               ],
             ),
           ),
-          Container(
-            height: 250,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (context, index) {
-                return CardComponent(
-                  height: 230,
-                  imageurl:
-                      'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${_castMovie.movies[index].posterPath}',
-                  judul: _castMovie.movies[index].title,
-                  desc: _castMovie.movies[index].releaseDate,
-                );
-              },
-              itemCount: 10,
-            ),
+          BlocBuilder<CastCubit, CastState>(
+            builder: (context, state) {
+              if (state is CastSuccessMovie) {
+                return Text('Amount data : ${state.castMovie.movies.length.toString()}');
+              } else if (state is CastError){
+                return Text(state.error);
+              }
+              return Text('Nothing');
+            },
           )
         ],
       ),

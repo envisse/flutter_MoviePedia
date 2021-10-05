@@ -9,7 +9,6 @@ class PeopleCubit extends Cubit<PeopleState> {
   PeopleCubit() : super(PeopleInitial());
 
   PeopleRepository _peopleRepository = PeopleRepository();
-
   void initialPeopleDetail(int id) async {
     emit(PeopleLoading());
     try {
@@ -27,7 +26,7 @@ class PeopleCubit extends Cubit<PeopleState> {
     try {
       List<People>? fetchdata = await _peopleRepository.getPeoplesData(page);
       (fetchdata != null)
-          ? emit(PeoplesSuccess(fetchdata))
+          ? emit(PeoplesSuccess(peoples: fetchdata, pagenumber: page))
           : emit(PeopleError('Data not found'));
     } catch (e) {
       emit(PeopleError(e.toString()));
